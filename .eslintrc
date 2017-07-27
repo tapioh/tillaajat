@@ -1,0 +1,53 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "globals": {
+    "React": true,
+    "T": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "allowImportExportEverywhere": false,
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": "warn",
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any"
+      }
+    ],
+    "no-multi-spaces": "off",
+    "no-multiple-empty-lines": "off",
+    "no-debugger": "warn",
+    "no-duplicate-imports": "off",
+    "require-yield": "warn",
+    "space-before-function-paren": "off",
+    "no-unused-expressions": "warn",
+    "no-unused-vars": "warn",
+    "import/no-duplicates": "off",
+    "react/jsx-uses-react": "warn",
+    "react/jsx-uses-vars": "warn",
+    "block-spacing": "warn",
+    "spaced-comment": "warn",
+    "padded-blocks": "warn",
+    "comma-dangle": "warn",
+    "space-before-blocks": "warn",
+    "indent": ["warn", 2],
+    "prefer-promise-reject-errors": "warn",
+    "no-use-before-define": "warn"
+  },
+  "plugins": [
+    "react",
+    "import"
+  ]
+}
