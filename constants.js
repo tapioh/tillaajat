@@ -15,3 +15,5 @@ export const POSITION_STRINGS = {
   [POSITION_GOALKEEPER]: 'MV',
   [POSITION_OTHER]: 'MUU'
 }
+
+export const HEADER_HEIGHT_IN_PX = 75
