@@ -5,23 +5,23 @@ import _ from 'lodash'
 import { View } from 'react-native'
 import { togglePlayer } from './actions'
 import PlayerPicker from './components/PlayerPicker'
-import PickViewHeader from './components/PickViewHeader'
-import PickViewActions from './components/PickViewActions'
+import PickScreenHeader from './components/PickScreenHeader'
+import PickScreenActions from './components/PickScreenActions'
 
-class PickView extends React.Component {
+class PickScreen extends React.Component {
   render() {
     const playersOrdered = _.sortBy(this.props.players, 'position')
     return (
       <View>
         <PlayerPicker players={playersOrdered} />
-        <PickViewHeader />
-        <PickViewActions />
+        <PickScreenHeader />
+        <PickScreenActions />
       </View>
     )
   }
 }
 
-PickView.propTypes = {
+PickScreen.propTypes = {
   players: PropTypes.array.isRequired
 }
 
@@ -35,4 +35,4 @@ const mapDispatchToProps = (dispatch) => ({
   togglePlayer: (player) => { dispatch(togglePlayer(player)) }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(PickView)
+export default connect(mapStateToProps, mapDispatchToProps)(PickScreen)

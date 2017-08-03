@@ -1,8 +1,10 @@
 import { createStore, combineReducers } from 'redux'
-import pickView from '../containers/PickView/reducer'
+import navigator from '../containers/Navigator/reducer'
+import pickScreen from '../containers/PickScreen/reducer'
 
 const reducer = combineReducers({
-  club: pickView
+  navigator,
+  club: pickScreen
 })
 
 const store = createStore(reducer)

@@ -12,7 +12,7 @@ const generateIcon = require('../../../../assets/icons/icon-dark-generate.png')
 const MIN_PLAYERS_COUNT = 6
 const TRANSLATE_DURATION_IN_MS = 500
 
-class PickViewActions extends React.Component {
+class PickScreenActions extends React.Component {
   state = {
     visible: false,
     actionsTranslate: new Animated.Value(0)
@@ -70,7 +70,7 @@ class PickViewActions extends React.Component {
   }
 }
 
-PickViewActions.propTypes = {
+PickScreenActions.propTypes = {
   showActions: PropTypes.bool.isRequired
 }
 
@@ -80,7 +80,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(PickViewActions)
+export default connect(mapStateToProps, null)(PickScreenActions)
 
 const styles = StyleSheet.create({
   actions: {

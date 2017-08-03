@@ -6,7 +6,7 @@ import Header from '../../../../components/Header'
 
 const MIN_PLAYERS_COUNT = 6
 
-class PickViewHeader extends React.Component {
+class PickScreenHeader extends React.Component {
   render() {
     return (
       <Header title='Valitse pelaajat' progress={this.props.progress} />
@@ -14,7 +14,7 @@ class PickViewHeader extends React.Component {
   }
 }
 
-PickViewHeader.propTypes = {
+PickScreenHeader.propTypes = {
   progress: PropTypes.number.isRequired
 }
 
@@ -24,4 +24,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(PickViewHeader)
+export default connect(mapStateToProps, null)(PickScreenHeader)

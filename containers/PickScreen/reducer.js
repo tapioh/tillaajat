@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 const initialState = { players, selectedPlayers: [] }
 
-function pickView(state = initialState, action) {
+export default function pickScreen(state = initialState, action) {
   switch (action.type) {
     case TOGGLE_PLAYER:
       const selectedPlayers = state.selectedPlayers
@@ -19,5 +19,3 @@ function pickView(state = initialState, action) {
       return state
   }
 }
-
-export default pickView
