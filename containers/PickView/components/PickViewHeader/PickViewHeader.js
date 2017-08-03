@@ -14,7 +14,7 @@ class PickViewHeader extends React.Component {
   }
 }
 
-PickViewHeader.PropTypes = {
+PickViewHeader.propTypes = {
   progress: PropTypes.number.isRequired
 }
 

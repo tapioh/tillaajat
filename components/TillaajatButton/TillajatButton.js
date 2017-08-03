@@ -32,7 +32,7 @@ export default class TillaajatButton extends React.Component {
 }
 
 TillaajatButton.propTypes = {
-  iconSrc: PropTypes.string.isRequired,
+  iconSrc: PropTypes.number.isRequired,
   iconWidth: PropTypes.number.isRequired,
   iconHeight: PropTypes.number.isRequired
 }

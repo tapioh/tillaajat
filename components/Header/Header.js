@@ -51,7 +51,7 @@ export default class Header extends React.Component {
   }
 }
 
-Header.PropTypes = {
+Header.propTypes = {
   title: PropTypes.string.isRequired,
   progress: PropTypes.number.isRequired
 }

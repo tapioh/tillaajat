@@ -36,8 +36,8 @@ class Player extends React.Component {
   }
 }
 
-Player.PropTypes = {
-  position: PropTypes.string.isRequired,
+Player.propTypes = {
+  position: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
   facebookId: PropTypes.string.isRequired,
