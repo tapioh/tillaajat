@@ -11,7 +11,7 @@ import { togglePlayer } from '../../actions'
 import Player from '../../../../components/Player'
 import { HEADER_HEIGHT_IN_PX } from '../../../../constants'
 
-class PickView extends React.Component {
+class PlayerPicker extends React.Component {
   onPressPlayer(player) {
     this.props.togglePlayer(player)
   }
@@ -44,7 +44,7 @@ class PickView extends React.Component {
   }
 }
 
-PickView.propTypes = {
+PlayerPicker.propTypes = {
   players: PropTypes.array.isRequired
 }
 
@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => ({
   togglePlayer: (player) => { dispatch(togglePlayer(player)) }
 })
 
-export default connect(null, mapDispatchToProps)(PickView)
+export default connect(null, mapDispatchToProps)(PlayerPicker)
 
 const styles = StyleSheet.create({
   container: {
