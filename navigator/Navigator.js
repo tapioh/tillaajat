@@ -5,20 +5,18 @@ import {
   Image,
   StyleSheet
 } from 'react-native'
-import PickScreen from '../../containers/PickScreen'
-import players from '../../players'
+import PickScreen from '../containers/PickScreen'
+import LineUp from '../containers/LineUp'
 
-const backgroundImage = require('../../assets/images/app-background.jpg')
+const backgroundImage = require('../assets/images/app-background.jpg')
 
 class Navigator extends React.Component {
   render() {
     const { screen } = this.props
     return (
       <Image source={backgroundImage} style={styles.backgroundImage}>
-        {screen === 'PickScreen' && <PickScreen players={players} />}
-        {screen === 'Generating' && null}
-        {screen === 'LineUps' && null}
-        {screen === 'ImageSaved' && null}
+        {screen === 'PickScreen' && <PickScreen />}
+        {screen === 'LineUp' && <LineUp />}
       </Image>
     )
   }
