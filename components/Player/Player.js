@@ -10,6 +10,7 @@ import {
   Platform
 } from 'react-native'
 import { POSITION_STRINGS } from '../../constants'
+import { mainFontFamily, colors } from '../../styles'
 
 const brushSymbol = require('../../assets/images/brush-symbol.png')
 const clubLogo = require('../../assets/images/tillaajat-logo-white-small.png')
@@ -95,16 +96,16 @@ const styles = StyleSheet.create({
     flex: 1
   },
   playerText: {
-    color: '#fff',
-    fontFamily: (Platform.OS === 'ios') ? 'Chalkduster' : 'Roboto',
+    color: colors.white,
+    fontFamily: mainFontFamily,
     fontSize: 18,
     marginRight: 10,
     width: 85,
     textAlign: 'center'
   },
   playerNumberText: {
-    color: '#fff',
-    fontFamily: (Platform.OS === 'ios') ? 'Chalkduster' : 'Roboto',
+    color: colors.white,
+    fontFamily: mainFontFamily,
     fontSize: 14,
     width: 85,
     textAlign: 'center',

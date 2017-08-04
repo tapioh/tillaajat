@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { BlurView } from 'react-native-blur'
 import { HEADER_HEIGHT_IN_PX } from '../../constants'
+import { colors } from '../../styles'
 
 const EASING_DURATION_IN_MS = 250
 const screenWidth = Dimensions.get('window').width
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     height: HEADER_HEIGHT_IN_PX - 10,
-    backgroundColor: '#fff'
+    backgroundColor: colors.white
   },
   headerProgress: {
     position: 'absolute',
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    color: '#333',
+    color: colors.black,
     backgroundColor: 'transparent'
   }
 })
