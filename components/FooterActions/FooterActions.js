@@ -7,6 +7,8 @@ import {
 } from 'react-native'
 
 const TRANSLATE_DURATION_IN_MS = 500
+const ACTIONS_BOTTOM_VALUE_IN_PX = 30
+const ACTIONS_CONTENT_HEIGHT_IN_PX = 55
 
 export default class FooterActions extends React.Component {
   state = {
@@ -47,7 +49,7 @@ export default class FooterActions extends React.Component {
         {
           translateY: this.state.actionsTranslate.interpolate({
             inputRange: [0, 1],
-            outputRange: [120, 0]
+            outputRange: [ACTIONS_BOTTOM_VALUE_IN_PX + ACTIONS_CONTENT_HEIGHT_IN_PX, 0]
           })
         }
       ]

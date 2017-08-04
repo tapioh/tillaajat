@@ -12,8 +12,9 @@ const MIN_PLAYERS_COUNT = 6
 class PickScreenActions extends React.Component {
   onPressGenerateButton() {
     const { generateLineUp, changeScreen, players, selectedPlayers } = this.props
-    generateLineUp(players, selectedPlayers)
-    changeScreen(SCREEN_LINE_UP)
+    generateLineUp(players, selectedPlayers).then(() => {
+      changeScreen(SCREEN_LINE_UP)
+    })
   }
 
   render() {
@@ -41,7 +42,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  generateLineUp: (players, selectedPlayers) => { dispatch(generateLineUp(players, selectedPlayers)) },
+  generateLineUp: (players, selectedPlayers) => { return dispatch(generateLineUp(players, selectedPlayers)) },
   changeScreen: (screenName) => { dispatch(changeScreen(screenName)) }
 })
 

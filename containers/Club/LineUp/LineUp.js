@@ -79,6 +79,8 @@ class LineUp extends React.Component {
 
   render() {
     const { lines, goalkeepers } = this.props.lineUp
+    const hasLines = lines.length > 0
+    const showActions = this.props.lineUpStatus === RECEIVE_GENERATE_LINEUP
     const lineUpAnimation = {
       opacity: this.state.lineUpFade,
       transform: [{ scale: this.state.lineUpTransform }]
@@ -111,7 +113,7 @@ class LineUp extends React.Component {
             </View>
           </Animated.View>
         </ScrollView>
-        <LineUpActions />
+        {hasLines && <LineUpActions showActions={showActions} />}
       </View>
     )
   }

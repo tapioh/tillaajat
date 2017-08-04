@@ -2,7 +2,15 @@ import { TOGGLE_PLAYER, GENERATE_LINEUP, GENERATE_LINEUP_STATUS } from './consta
 import players from '../../players'
 import _ from 'lodash'
 
-const initialState = { players, selectedPlayers: [], lineUp: { lines: [], goalkeepers: [] } }
+const initialState = {
+  players,
+  selectedPlayers: [],
+  lineUpStatus: '',
+  lineUp: {
+    lines: [],
+    goalkeepers: []
+  }
+}
 
 export default function club(state = initialState, action) {
   switch (action.type) {

@@ -15,7 +15,7 @@ class PickScreenActions extends React.Component {
 
   render() {
     return (
-      <FooterActions visible={true}>
+      <FooterActions visible={this.props.showActions}>
         <TillaajatButton iconSrc={generateIcon} iconWidth={48} iconHeight={38} onPress={() => this.onPressGenerateButton()} />
       </FooterActions>
     )
@@ -24,7 +24,8 @@ class PickScreenActions extends React.Component {
 
 PickScreenActions.propTypes = {
   players: PropTypes.array.isRequired,
-  selectedPlayers: PropTypes.array.isRequired
+  selectedPlayers: PropTypes.array.isRequired,
+  showActions: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = state => {

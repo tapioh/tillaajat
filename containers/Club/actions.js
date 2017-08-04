@@ -16,7 +16,7 @@ export function togglePlayer(player) {
 }
 
 export function generateLineUp(players, selectedPlayers) {
-  return dispatch => {
+  return async dispatch => {
     dispatch({
       type: GENERATE_LINEUP_STATUS,
       data: REQUEST_GENERATE_LINEUP
