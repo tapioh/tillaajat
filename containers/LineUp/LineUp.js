@@ -2,18 +2,53 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
+  Animated,
   View,
   Text,
   ScrollView,
   TouchableOpacity,
-  StyleSheet,
-  Platform
+  StyleSheet
 } from 'react-native'
+import {
+  GENERATE_LINEUP_DURATION_IN_MS,
+  REQUEST_GENERATE_LINEUP,
+  RECEIVE_GENERATE_LINEUP
+} from '../../containers/PickScreen/constants'
 import Player from '../../components/Player'
-import { lineUpGenerator } from '../../util'
+import LineUpActions from './components/LineUpActions'
 import { colors, mainFontFamily } from '../../styles'
 
-class LineUps extends React.Component {
+const FADE_IN_DURATION_IN_MS = 300
+
+class LineUp extends React.Component {
+  state = {
+    lineUpFade: new Animated.Value(0),
+    lineUpTransform: new Animated.Value(0.5)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    switch (nextProps.lineUpStatus) {
+      case REQUEST_GENERATE_LINEUP:
+        Animated.timing(this.state.lineUpFade, {
+          toValue: 0,
+          duration: GENERATE_LINEUP_DURATION_IN_MS
+        }).start()
+        Animated.timing(this.state.lineUpTransform, {
+          toValue: 0.5
+        }).start()
+        break
+      case RECEIVE_GENERATE_LINEUP:
+        Animated.timing(this.state.lineUpFade, {
+          toValue: 1,
+          duration: FADE_IN_DURATION_IN_MS
+        }).start()
+        Animated.spring(this.state.lineUpTransform, {
+          toValue: 1
+        }).start()
+        break
+    }
+  }
+
   onLongPressPlayer(player) {
     console.warn('LONG PRESS', player)
   }
@@ -44,50 +79,56 @@ class LineUps extends React.Component {
 
   render() {
     const { lines, goalkeepers } = this.props.lineUp
+    const lineUpAnimation = {
+      opacity: this.state.lineUpFade,
+      transform: [{ scale: this.state.lineUpTransform }]
+    }
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        {
-          lines.map((line, index) => {
-            return <View style={styles.lineWrapper} key={index}>
-              <Text style={styles.lineText}>{index + 1}. KETJU</Text>
-              <View style={styles.line}>
-                {this.renderLine(line)}
-              </View>
-            </View>
-          })
-        }
-        <View style={styles.lineWrapper}>
-          <Text style={styles.lineText}>{goalkeepers.length > 1 ? 'MAALIVAHDIT' : 'MAALIVAHTI'}</Text>
-          <View style={styles.line}>
+      <View>
+        <ScrollView contentContainerStyle={styles.container}>
+          <Animated.View style={lineUpAnimation}>
             {
-              goalkeepers.map((goalkeeper, index) => {
-                return <View key={index}>
-                  {this.renderPlayer(goalkeeper)}
+              lines.map((line, index) => {
+                return <View style={styles.lineWrapper} key={index}>
+                  <Text style={styles.lineText}>{index + 1}. KETJU</Text>
+                  <View style={styles.line}>
+                    {this.renderLine(line)}
+                  </View>
                 </View>
               })
             }
-          </View>
-        </View>
-      </ScrollView>
+            <View style={styles.lineWrapper}>
+              <Text style={styles.lineText}>{goalkeepers.length > 1 ? 'MAALIVAHDIT' : 'MAALIVAHTI'}</Text>
+              <View style={styles.line}>
+                {
+                  goalkeepers.map((goalkeeper, index) => {
+                    return <View key={index}>
+                      {this.renderPlayer(goalkeeper)}
+                    </View>
+                  })
+                }
+              </View>
+            </View>
+          </Animated.View>
+        </ScrollView>
+        <LineUpActions />
+      </View>
     )
   }
 }
 
-LineUps.propTypes = {
+LineUp.propTypes = {
   lineUp: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
   return {
-    lineUp: lineUpGenerator(state.club.players, state.club.selectedPlayers)
+    lineUp: state.club.lineUp,
+    lineUpStatus: state.club.lineUpStatus
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(LineUps)
+export default connect(mapStateToProps, null)(LineUp)
 
 const styles = StyleSheet.create({
   container: {

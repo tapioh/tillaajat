@@ -1,8 +1,8 @@
-import { TOGGLE_PLAYER } from './constants'
+import { TOGGLE_PLAYER, GENERATE_LINEUP, GENERATE_LINEUP_STATUS } from './constants'
 import players from '../../players'
 import _ from 'lodash'
 
-const initialState = { players, selectedPlayers: [] }
+const initialState = { players, selectedPlayers: [], lineUp: { lines: [], goalkeepers: [] } }
 
 export default function pickScreen(state = initialState, action) {
   switch (action.type) {
@@ -15,6 +15,10 @@ export default function pickScreen(state = initialState, action) {
         selectedPlayers.push(selectedPlayerNumber)
       }
       return {...state, selectedPlayers}
+    case GENERATE_LINEUP:
+      return {...state, lineUp: action.data}
+    case GENERATE_LINEUP_STATUS:
+      return {...state, lineUpStatus: action.data}
     default:
       return state
   }

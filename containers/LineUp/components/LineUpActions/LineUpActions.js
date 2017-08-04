@@ -1,24 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { generateLineUp } from '../../actions'
-import { changeScreen, SCREEN_LINE_UP } from '../../../../navigator'
+import { generateLineUp } from '../../../../containers/PickScreen/actions'
 import FooterActions from '../../../../components/FooterActions'
 import TillaajatButton from '../../../../components/TillaajatButton'
 
 const generateIcon = require('../../../../assets/icons/icon-dark-generate.png')
-const MIN_PLAYERS_COUNT = 6
 
 class PickScreenActions extends React.Component {
   onPressGenerateButton() {
-    const { generateLineUp, changeScreen, players, selectedPlayers } = this.props
+    const { generateLineUp, players, selectedPlayers } = this.props
     generateLineUp(players, selectedPlayers)
-    changeScreen(SCREEN_LINE_UP)
   }
 
   render() {
     return (
-      <FooterActions visible={this.props.showActions}>
+      <FooterActions visible={true}>
         <TillaajatButton iconSrc={generateIcon} iconWidth={48} iconHeight={38} onPress={() => this.onPressGenerateButton()} />
       </FooterActions>
     )
@@ -27,22 +24,18 @@ class PickScreenActions extends React.Component {
 
 PickScreenActions.propTypes = {
   players: PropTypes.array.isRequired,
-  selectedPlayers: PropTypes.array.isRequired,
-  showActions: PropTypes.bool.isRequired,
-  changeScreen: PropTypes.func.isRequired
+  selectedPlayers: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => {
   return {
     players: state.club.players,
-    selectedPlayers: state.club.selectedPlayers,
-    showActions: state.club.selectedPlayers.length >= MIN_PLAYERS_COUNT
+    selectedPlayers: state.club.selectedPlayers
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  generateLineUp: (players, selectedPlayers) => { dispatch(generateLineUp(players, selectedPlayers)) },
-  changeScreen: (screenName) => { dispatch(changeScreen(screenName)) }
+  generateLineUp: (players, selectedPlayers) => { dispatch(generateLineUp(players, selectedPlayers)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PickScreenActions)
