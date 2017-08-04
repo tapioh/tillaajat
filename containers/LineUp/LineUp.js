@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import Player from '../../components/Player'
 import { lineUpGenerator } from '../../util'
+import { colors, mainFontFamily } from '../../styles'
 
 class LineUps extends React.Component {
   onLongPressPlayer(player) {
@@ -108,8 +109,8 @@ const styles = StyleSheet.create({
   },
   lineText: {
     backgroundColor: 'transparent',
-    color: '#fff',
-    fontFamily: (Platform.OS === 'ios') ? 'Chalkduster' : 'Roboto',
+    color: colors.white,
+    fontFamily: mainFontFamily,
     fontSize: 20,
     width: '100%',
     textAlign: 'center',
