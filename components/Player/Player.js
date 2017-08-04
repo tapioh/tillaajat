@@ -30,8 +30,8 @@ class Player extends React.Component {
         <Image source={brushSymbol} style={styles.brushSymbol} />
         {togglable && selected && <Image source={checkmarkIcon} style={styles.checkmarkIcon} />}
         <View style={styles.playerTextWrapper}>
-          {firstName && <Text style={styles.playerText}>{firstName}</Text>}
           {positionString && <Text style={styles.playerText}>{positionString}</Text>}
+          {firstName && <Text style={styles.playerText}>{firstName}</Text>}
           {number && <Text style={styles.playerNumberText}>#{number}</Text>}
         </View>
       </View>

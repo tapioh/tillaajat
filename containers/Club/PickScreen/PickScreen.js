@@ -9,7 +9,7 @@ import PickScreenActions from './components/PickScreenActions'
 
 class PickScreen extends React.Component {
   render() {
-    const playersOrdered = _.sortBy(this.props.players, 'position')
+    const playersOrdered = _.sortBy(this.props.players, 'number')
     return (
       <View>
         <PlayerPicker players={playersOrdered} />
