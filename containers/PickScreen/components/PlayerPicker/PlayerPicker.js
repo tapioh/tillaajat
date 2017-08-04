@@ -29,10 +29,10 @@ class PlayerPicker extends React.Component {
               <View style={styles.playerWrapper} key={player.number}>
                 <TouchableOpacity onPress={() => this.onPressPlayer(player)} onLongPress={() => this.onLongPressPlayer(player)}>
                   <View>
-                    <Player name={player.name}
-                            position={player.position}
+                    <Player position={player.position}
                             number={player.number}
-                            facebookId={player.facebookId} />
+                            facebookId={player.facebookId}
+                            togglable={true} />
                   </View>
                 </TouchableOpacity>
               </View>

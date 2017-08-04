@@ -17,19 +17,21 @@ const checkmarkIcon = require('../../assets/icons/icon-white-checkmark.png')
 
 class Player extends React.Component {
   render() {
-    const { position, name, number, facebookId, selected } = this.props
+    const { position, name, number, facebookId, togglable, selected } = this.props
     const imageSource = facebookId
       ? { uri: `https://graph.facebook.com/${facebookId}/picture?width=200&height=200` }
       : clubLogo
-    const positionString = POSITION_STRINGS[position]
+    const positionString = position ? POSITION_STRINGS[position] : null
+    const firstName = name ? name.split(" ").slice(0, -1).join(' ') : null
     return (
       <View style={styles.playerContainer}>
-        <Image source={imageSource} style={[styles.playerImage, selected && { opacity: 0.2 }]} />
+        <Image source={imageSource} style={[styles.playerImage, togglable && selected && { opacity: 0.2 }]} />
         <Image source={brushSymbol} style={styles.brushSymbol} />
-        {selected && <Image source={checkmarkIcon} style={styles.checkmarkIcon} />}
+        {togglable && selected && <Image source={checkmarkIcon} style={styles.checkmarkIcon} />}
         <View style={styles.playerTextWrapper}>
-          <Text style={styles.playerText}>{positionString}</Text>
-          <Text style={styles.playerNumberText}>#{number}</Text>
+          {firstName && <Text style={styles.playerText}>{firstName}</Text>}
+          {positionString && <Text style={styles.playerText}>{positionString}</Text>}
+          {number && <Text style={styles.playerNumberText}>#{number}</Text>}
         </View>
       </View>
     )
@@ -37,11 +39,12 @@ class Player extends React.Component {
 }
 
 Player.propTypes = {
-  position: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.number.isRequired,
+  position: PropTypes.number,
+  name: PropTypes.string,
+  number: PropTypes.number,
   facebookId: PropTypes.string.isRequired,
-  selected: PropTypes.bool.isRequired
+  selected: PropTypes.bool.isRequired,
+  togglable: PropTypes.bool
 }
 
 const mapStateToProps = (state, ownProps) => {

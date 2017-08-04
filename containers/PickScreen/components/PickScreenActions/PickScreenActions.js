@@ -6,6 +6,7 @@ import {
   Animated,
   StyleSheet
 } from 'react-native'
+import { changeScreen, SCREEN_LINE_UP } from '../../../../navigator'
 import TillaajatButton from '../../../../components/TillaajatButton'
 
 const generateIcon = require('../../../../assets/icons/icon-dark-generate.png')
@@ -46,7 +47,7 @@ class PickScreenActions extends React.Component {
   }
 
   onPressGenerateButton() {
-    console.warn('PRESS GENERATE')
+    this.props.changeScreen(SCREEN_LINE_UP)
   }
 
   render() {
@@ -63,7 +64,7 @@ class PickScreenActions extends React.Component {
     return (
       <View style={styles.actions}>
         <Animated.View style={actionsTransform}>
-          <TillaajatButton iconSrc={generateIcon} iconWidth={48} iconHeight={38} onPress={this.onPressGenerateButton} />
+          <TillaajatButton iconSrc={generateIcon} iconWidth={48} iconHeight={38} onPress={() => this.onPressGenerateButton()} />
         </Animated.View>
       </View>
     )
@@ -71,7 +72,8 @@ class PickScreenActions extends React.Component {
 }
 
 PickScreenActions.propTypes = {
-  showActions: PropTypes.bool.isRequired
+  showActions: PropTypes.bool.isRequired,
+  changeScreen: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
@@ -80,7 +82,11 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(PickScreenActions)
+const mapDispatchToProps = (dispatch) => ({
+  changeScreen: (screenName) => { dispatch(changeScreen(screenName)) }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PickScreenActions)
 
 const styles = StyleSheet.create({
   actions: {

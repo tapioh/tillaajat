@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { View } from 'react-native'
-import { togglePlayer } from './actions'
 import PlayerPicker from './components/PlayerPicker'
 import PickScreenHeader from './components/PickScreenHeader'
 import PickScreenActions from './components/PickScreenActions'
@@ -31,8 +30,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  togglePlayer: (player) => { dispatch(togglePlayer(player)) }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(PickScreen)
+export default connect(mapStateToProps, null)(PickScreen)
