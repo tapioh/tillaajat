@@ -59,8 +59,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignContent: 'flex-start',
-    justifyContent: 'center',
-    paddingTop: HEADER_HEIGHT_IN_PX
+    justifyContent: 'space-around',
+    paddingTop: HEADER_HEIGHT_IN_PX,
+    paddingBottom: 90
   },
   playerWrapper: {
     flexDirection: 'column',

@@ -7,7 +7,8 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from 'react-native'
 import {
   GENERATE_LINEUP_DURATION_IN_MS,
@@ -29,22 +30,26 @@ class LineUp extends React.Component {
   componentWillReceiveProps(nextProps) {
     switch (nextProps.lineUpStatus) {
       case REQUEST_GENERATE_LINEUP:
-        Animated.timing(this.state.lineUpFade, {
-          toValue: 0,
-          duration: GENERATE_LINEUP_DURATION_IN_MS
-        }).start()
-        Animated.timing(this.state.lineUpTransform, {
-          toValue: 0.5
-        }).start()
+        Animated.parallel([
+          Animated.timing(this.state.lineUpFade, {
+            toValue: 0,
+            duration: GENERATE_LINEUP_DURATION_IN_MS
+          }).start(),
+          Animated.timing(this.state.lineUpTransform, {
+            toValue: 0.5
+          }).start()
+        ]);
         break
       case RECEIVE_GENERATE_LINEUP:
-        Animated.timing(this.state.lineUpFade, {
-          toValue: 1,
-          duration: FADE_IN_DURATION_IN_MS
-        }).start()
-        Animated.spring(this.state.lineUpTransform, {
-          toValue: 1
-        }).start()
+        Animated.parallel([
+          Animated.timing(this.state.lineUpFade, {
+            toValue: 1,
+            duration: FADE_IN_DURATION_IN_MS
+          }).start(),
+          Animated.spring(this.state.lineUpTransform, {
+            toValue: 1
+          }).start()
+        ])
         break
     }
   }
@@ -80,7 +85,7 @@ class LineUp extends React.Component {
   render() {
     const { lines, goalkeepers } = this.props.lineUp
     const hasLines = lines.length > 0
-    const showActions = this.props.lineUpStatus === RECEIVE_GENERATE_LINEUP
+    const showActions = this.props.lineUpStatus === RECEIVE_GENERATE_LINEUP || Platform.OS === 'android'
     const lineUpAnimation = {
       opacity: this.state.lineUpFade,
       transform: [{ scale: this.state.lineUpTransform }]
@@ -134,7 +139,8 @@ export default connect(mapStateToProps, null)(LineUp)
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 30,
+    paddingTop: 40,
+    paddingBottom: 50,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center'
