@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native'
-import { togglePlayer } from '../../actions'
-import Player from '../../../../components/Player'
-import { HEADER_HEIGHT_IN_PX } from '../../../../constants'
+import { togglePlayer } from '../../../actions'
+import Player from '../../../../../components/Player'
+import { HEADER_HEIGHT_IN_PX } from '../../../../../constants'
 
 class PlayerPicker extends React.Component {
   onPressPlayer(player) {

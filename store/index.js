@@ -1,11 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import navigator from '../navigator/reducer'
-import pickScreen from '../containers/PickScreen/reducer'
+import club from '../containers/Club/reducer'
 
 const reducer = combineReducers({
   navigator,
-  club: pickScreen
+  club
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

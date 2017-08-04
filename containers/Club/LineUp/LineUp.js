@@ -13,10 +13,10 @@ import {
   GENERATE_LINEUP_DURATION_IN_MS,
   REQUEST_GENERATE_LINEUP,
   RECEIVE_GENERATE_LINEUP
-} from '../../containers/PickScreen/constants'
-import Player from '../../components/Player'
+} from '../constants'
+import Player from '../../../components/Player'
 import LineUpActions from './components/LineUpActions'
-import { colors, mainFontFamily } from '../../styles'
+import { colors, mainFontFamily } from '../../../styles'
 
 const FADE_IN_DURATION_IN_MS = 300
 

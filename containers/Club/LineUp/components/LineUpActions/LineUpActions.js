@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { generateLineUp } from '../../../../containers/PickScreen/actions'
-import FooterActions from '../../../../components/FooterActions'
-import TillaajatButton from '../../../../components/TillaajatButton'
+import { generateLineUp } from '../../../actions'
+import FooterActions from '../../../../../components/FooterActions'
+import TillaajatButton from '../../../../../components/TillaajatButton'
 
-const generateIcon = require('../../../../assets/icons/icon-dark-generate.png')
+const generateIcon = require('../../../../../assets/icons/icon-dark-generate.png')
 
 class PickScreenActions extends React.Component {
   onPressGenerateButton() {

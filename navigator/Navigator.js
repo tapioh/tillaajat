@@ -5,8 +5,8 @@ import {
   Image,
   StyleSheet
 } from 'react-native'
-import PickScreen from '../containers/PickScreen'
-import LineUp from '../containers/LineUp'
+import PickScreen from '../containers/Club/PickScreen'
+import LineUp from '../containers/Club/LineUp'
 
 const backgroundImage = require('../assets/images/app-background.jpg')
 

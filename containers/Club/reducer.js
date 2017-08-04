@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 const initialState = { players, selectedPlayers: [], lineUp: { lines: [], goalkeepers: [] } }
 
-export default function pickScreen(state = initialState, action) {
+export default function club(state = initialState, action) {
   switch (action.type) {
     case TOGGLE_PLAYER:
       const selectedPlayers = state.selectedPlayers

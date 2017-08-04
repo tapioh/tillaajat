@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { generateLineUp } from '../../actions'
-import { changeScreen, SCREEN_LINE_UP } from '../../../../navigator'
-import FooterActions from '../../../../components/FooterActions'
-import TillaajatButton from '../../../../components/TillaajatButton'
+import { generateLineUp } from '../../../actions'
+import { changeScreen, SCREEN_LINE_UP } from '../../../../../navigator'
+import FooterActions from '../../../../../components/FooterActions'
+import TillaajatButton from '../../../../../components/TillaajatButton'
 
-const generateIcon = require('../../../../assets/icons/icon-dark-generate.png')
+const generateIcon = require('../../../../../assets/icons/icon-dark-generate.png')
 const MIN_PLAYERS_COUNT = 6
 
 class PickScreenActions extends React.Component {

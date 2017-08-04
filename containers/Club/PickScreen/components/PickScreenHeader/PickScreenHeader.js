@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { StyleSheet } from 'react-native'
-import Header from '../../../../components/Header'
+import Header from '../../../../../components/Header'
 
 const MIN_PLAYERS_COUNT = 6
 
