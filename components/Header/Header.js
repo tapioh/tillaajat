@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   headerContent: {
     height: HEADER_HEIGHT_IN_PX - 10,
-    paddingTop: 30,
+    paddingTop: Platform.OS === 'ios' ? 30 : 22,
     alignItems: 'center',
     position: 'relative',
     zIndex: 3

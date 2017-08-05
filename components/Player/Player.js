@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     width: 75,
     height: 75,
     borderRadius: 75 / 2,
-    marginBottom: 10
+    marginBottom: 5
   },
   playerTextWrapper: {
     flex: 1
@@ -99,15 +99,12 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontFamily: mainFontFamily,
     fontSize: 18,
-    marginRight: 10,
-    width: 85,
     textAlign: 'center'
   },
   playerNumberText: {
     color: colors.white,
     fontFamily: mainFontFamily,
     fontSize: 14,
-    width: 85,
     textAlign: 'center',
   }
 })
