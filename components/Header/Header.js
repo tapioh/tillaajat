@@ -5,7 +5,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native'
 import { BlurView } from 'react-native-blur'
 import { HEADER_HEIGHT_IN_PX } from '../../constants'
@@ -39,11 +40,13 @@ export default class Header extends React.Component {
             <Animated.View style={[styles.headerProgressFill, { width: fillWidth }]}></Animated.View>
           </View>
         </View>
-        <BlurView
-          style={styles.blurView}
-          viewRef={null}
-          blurType='light'
-          blurAmount={10} />
+        {
+          Platform.OS === 'ios' &&
+          <BlurView style={styles.blurView}
+                    viewRef={this.headerBlurred}
+                    blurType='xlight'
+                    blurAmount={10} />
+        }
         <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>{this.props.title}</Text>
         </View>
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     height: HEADER_HEIGHT_IN_PX - 10,
-    backgroundColor: colors.white
+    backgroundColor: Platform.OS === 'ios' ? 'transparent' : colors.white
   },
   headerProgress: {
     position: 'absolute',
@@ -102,7 +105,7 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    height: HEADER_HEIGHT_IN_PX,
+    height: HEADER_HEIGHT_IN_PX - 10,
     zIndex: 2,
     borderWidth: 0
   },
