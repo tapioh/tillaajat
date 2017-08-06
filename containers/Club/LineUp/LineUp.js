@@ -94,7 +94,7 @@ class LineUp extends React.Component {
     return (
       <View>
         <ScrollView contentContainerStyle={styles.container}
-                    ref={component => this.screenShotRef = component}
+                    ref={component => this.scrollView = component}
                     collapsable={false}>
           <Animated.View style={lineUpAnimation}>
             {
@@ -121,7 +121,7 @@ class LineUp extends React.Component {
             </View>
           </Animated.View>
         </ScrollView>
-        {hasLines && <LineUpActions showActions={showActions} screenShotRef={this.screenShotRef} />}
+        {hasLines && <LineUpActions showActions={showActions} parentViewRef={this.scrollView} />}
       </View>
     )
   }

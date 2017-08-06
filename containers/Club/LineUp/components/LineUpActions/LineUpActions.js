@@ -21,7 +21,7 @@ class LineUpActions extends React.Component {
   }
 
   onPressDownloadButton() {
-    takeSnapshot(this.props.screenShotRef, {
+    takeSnapshot(this.props.parentViewRef, {
       format: 'jpeg',
       quality: 0.8,
       snapshotContentContainer: true
@@ -51,7 +51,7 @@ LineUpActions.propTypes = {
   players: PropTypes.array.isRequired,
   selectedPlayers: PropTypes.array.isRequired,
   showActions: PropTypes.bool.isRequired,
-  screenShotRef: PropTypes.any
+  parentViewRef: PropTypes.any
 }
 
 const mapStateToProps = state => {
@@ -62,7 +62,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  generateLineUp: (players, selectedPlayers) => { dispatch(generateLineUp(players, selectedPlayers)) }
+  generateLineUp: (players, selectedPlayers) => { return dispatch(generateLineUp(players, selectedPlayers)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LineUpActions)
