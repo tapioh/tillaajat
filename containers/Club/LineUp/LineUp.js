@@ -43,15 +43,15 @@ class LineUp extends React.Component {
     )
   }
 
-  onPressContinueButton() {
-    this.props.resetPlayers()
-    this.props.changeScreen(SCREEN_PICK_SCREEN)
-  }
-
   onPictureSave(uri) {
     this.setState({
       pictureSaveState: PICTURE_SAVE_STATE_SAVED
     })
+  }
+
+  onPressContinueButton() {
+    this.props.resetPlayers()
+    this.props.changeScreen(SCREEN_PICK_SCREEN)
   }
 
   render() {
@@ -68,8 +68,8 @@ class LineUp extends React.Component {
         {
           hasLines &&
           <LineUpActions showActions={true}
-                                    onPressGenerateButton={() => this.onPressGenerateButton()}
-                                    onPressSaveButton={() => this.onPressSaveButton()} />
+                         onPressGenerateButton={() => this.onPressGenerateButton()}
+                         onPressSaveButton={() => this.onPressSaveButton()} />
         }
         <ImageNotificationModal showModal={showModal}
                                 pictureSaveState={pictureSaveState}
