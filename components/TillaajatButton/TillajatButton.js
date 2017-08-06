@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native'
+import { colors } from '../../styles'
 
 export default class TillaajatButton extends React.Component {
   render() {
@@ -42,10 +43,10 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     height: 55,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     borderWidth: 0,
     borderRadius: 55,
-    shadowColor: '#000000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 0
