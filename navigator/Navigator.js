@@ -18,14 +18,7 @@ const backgroundImage = require('../assets/images/app-background.jpg')
 
 class Navigator extends React.Component {
   state = {
-    viewFade: new Animated.Value(0)
-  }
-
-  componentDidMount() {
-    Animated.timing(this.state.viewFade, {
-      toValue: 1,
-      duration: CHANGE_SCREEN_DURATION_IN_MS
-    }).start()
+    viewFade: new Animated.Value(1)
   }
 
   componentWillReceiveProps(nextProps) {
