@@ -72,8 +72,8 @@ FooterActions.propTypes = {
 const styles = StyleSheet.create({
   actions: {
     position: 'absolute',
-    right: 70,
+    right: 60,
     bottom: 30,
-    left: 70
+    left: 60
   }
 })

@@ -74,6 +74,7 @@ class LineUp extends React.Component {
             {
               player &&
               <Player name={player.name}
+                      number={player.number}
                       facebookId={player.facebookId} />
             }
           </View>
@@ -92,7 +93,9 @@ class LineUp extends React.Component {
     }
     return (
       <View>
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}
+                    ref={component => this.screenShotRef = component}
+                    collapsable={false}>
           <Animated.View style={lineUpAnimation}>
             {
               lines.map((line, index) => {
@@ -118,7 +121,7 @@ class LineUp extends React.Component {
             </View>
           </Animated.View>
         </ScrollView>
-        {hasLines && <LineUpActions showActions={showActions} />}
+        {hasLines && <LineUpActions showActions={showActions} screenShotRef={this.screenShotRef} />}
       </View>
     )
   }
