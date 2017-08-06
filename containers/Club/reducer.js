@@ -1,4 +1,9 @@
-import { TOGGLE_PLAYER, GENERATE_LINEUP, GENERATE_LINEUP_STATUS } from './constants'
+import {
+  TOGGLE_PLAYER,
+  RESET_PLAYERS,
+  GENERATE_LINEUP,
+  GENERATE_LINEUP_STATUS
+} from './constants'
 import players from '../../players'
 import _ from 'lodash'
 
@@ -23,6 +28,8 @@ export default function club(state = initialState, action) {
         selectedPlayers.push(selectedPlayerNumber)
       }
       return {...state, selectedPlayers}
+    case RESET_PLAYERS:
+      return {...state, selectedPlayers: []}
     case GENERATE_LINEUP:
       return {...state, lineUp: action.data}
     case GENERATE_LINEUP_STATUS:

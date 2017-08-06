@@ -1,5 +1,6 @@
 import {
   TOGGLE_PLAYER,
+  RESET_PLAYERS,
   GENERATE_LINEUP,
   GENERATE_LINEUP_STATUS,
   REQUEST_GENERATE_LINEUP,
@@ -12,6 +13,12 @@ export function togglePlayer(player) {
   return {
     type: TOGGLE_PLAYER,
     data: player
+  }
+}
+
+export function resetPlayers() {
+  return {
+    type: RESET_PLAYERS
   }
 }
 
