@@ -1,40 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import {
-  View,
   ScrollView,
-  TouchableOpacity,
+  View,
   StyleSheet
 } from 'react-native'
-import { togglePlayer } from '../../../actions'
-import Player from '../../../../../components/Player'
-import { HEADER_HEIGHT_IN_PX } from '../../../../../constants'
+import PlayerRow from '../../../../../components/PlayerRow'
+import PlayerActions from '../PlayerActions'
 
-class PlayerPicker extends React.Component {
-  onPressPlayer(player) {
-    this.props.togglePlayer(player)
-  }
-
-  onLongPressPlayer(player) {
-    console.warn('LONG PRESS', player)
-  }
-
+export default class PlayerPicker extends React.Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
         {
           this.props.players.map(player => {
             return (
-              <View style={styles.playerWrapper} key={player.number}>
-                <TouchableOpacity onPress={() => this.onPressPlayer(player)} onLongPress={() => this.onLongPressPlayer(player)}>
-                  <View>
-                    <Player name={player.name}
-                            number={player.number}
-                            facebookId={player.facebookId}
-                            togglable={true} />
-                  </View>
-                </TouchableOpacity>
+              <View style={styles.playerRow} key={player.number}>
+                <PlayerRow name={player.name}
+                        number={player.number}
+                        facebookId={player.facebookId} />
+                <PlayerActions player={player} />
               </View>
             )
           })
@@ -48,25 +33,13 @@ PlayerPicker.propTypes = {
   players: PropTypes.array.isRequired
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  togglePlayer: (player) => { dispatch(togglePlayer(player)) }
-})
-
-export default connect(null, mapDispatchToProps)(PlayerPicker)
-
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignContent: 'flex-start',
-    justifyContent: 'space-around',
-    paddingTop: HEADER_HEIGHT_IN_PX,
-    paddingBottom: 90
+    paddingVertical: 20
   },
-  playerWrapper: {
-    flexDirection: 'column',
-    marginHorizontal: 5,
-    marginTop: 10,
-    marginBottom: 15
+  playerRow: {
+    flexDirection: 'row',
+    marginHorizontal: 15,
+    marginVertical: 10
   }
 })

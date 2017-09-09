@@ -6,7 +6,8 @@ import {
   View,
   ScrollView,
   CameraRoll,
-  StyleSheet
+  StyleSheet,
+  Dimensions
 } from 'react-native'
 import { generateLineUp, resetPlayers } from '../actions'
 import { changeScreen, SCREEN_PICK_SCREEN } from '../../../navigator'
@@ -14,8 +15,11 @@ import { PICTURE_SAVE_STATE_LOADING, PICTURE_SAVE_STATE_SAVED } from './constant
 import Lines from './components/Lines'
 import LineUpActions from './components/LineUpActions'
 import ImageNotificationModal from './components/ImageNotificationModal'
+import { colors } from '../../../styles'
 
-class LineUp extends React.Component {
+const screenHeight = Dimensions.get('window').height
+
+class LineUpScreen extends React.Component {
   state = {
     pictureSaveState: ''
   }
@@ -59,9 +63,8 @@ class LineUp extends React.Component {
     const hasLines = this.props.lineUp.lines.length > 0
     const showModal = pictureSaveState !== ''
     return (
-      <View>
-        <ScrollView contentContainerStyle={styles.container}
-                    ref={component => this.scrollView = component}
+      <View style={styles.container}>
+        <ScrollView ref={component => this.scrollView = component}
                     collapsable={false}>
           <Lines lineUp={this.props.lineUp} lineUpStatus={this.props.lineUpStatus} />
         </ScrollView>
@@ -79,7 +82,7 @@ class LineUp extends React.Component {
   }
 }
 
-LineUp.propTypes = {
+LineUpScreen.propTypes = {
   lineUp: PropTypes.object.isRequired,
   lineUpStatus: PropTypes.string.isRequired,
   players: PropTypes.array.isRequired,
@@ -101,14 +104,13 @@ const mapDispatchToProps = (dispatch) => ({
   changeScreen: (screenName) => { dispatch(changeScreen(screenName)) }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LineUp)
+export default connect(mapStateToProps, mapDispatchToProps)(LineUpScreen)
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 40,
-    paddingBottom: 50,
+    marginTop: -20,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center'
+    height: screenHeight
   }
 })

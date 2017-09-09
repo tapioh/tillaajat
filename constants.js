@@ -17,3 +17,7 @@ export const POSITION_STRINGS = {
 }
 
 export const HEADER_HEIGHT_IN_PX = 75
+export const PLAYER_ROW_HEIGHT_IN_PX = 45
+export const PLAYER_ACTIONS_WIDTH_IN_PX = 110
+export const PLAYER_BLOCK_HEIGHT_IN_PX = 100
+export const PLAYER_BLOCK_WIDTH_IN_PX = 100

@@ -13,7 +13,7 @@ import {
   RECEIVE_GENERATE_LINEUP
 } from '../../../constants'
 import { colors, mainFontFamily } from '../../../../../styles'
-import Player from '../../../../../components/Player'
+import PlayerBlock from '../../../../../components/PlayerBlock'
 
 const FADE_IN_DURATION_IN_MS = 300
 
@@ -69,7 +69,7 @@ export default class Lines extends React.Component {
           <View>
             {
               player &&
-              <Player name={player.name}
+              <PlayerBlock name={player.name}
                       number={player.number}
                       facebookId={player.facebookId} />
             }
@@ -87,7 +87,7 @@ export default class Lines extends React.Component {
     }
 
     return (
-      <Animated.View style={lineUpAnimation}>
+      <Animated.View style={[styles.linesWrapper, lineUpAnimation]}>
         {
           lines.map((line, index) => {
             return <View style={styles.lineWrapper} key={index}>
@@ -98,7 +98,7 @@ export default class Lines extends React.Component {
             </View>
           })
         }
-        <View style={styles.lineWrapper}>
+        <View style={[styles.lineWrapper, styles.goalkeepers]}>
           <Text style={styles.lineText}>{goalkeepers.length > 1 ? 'MAALIVAHDIT' : 'MAALIVAHTI'}</Text>
           <View style={styles.line}>
             {
@@ -122,36 +122,46 @@ Lines.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 40,
-    paddingBottom: 50,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center'
   },
+  linesWrapper: {
+    marginTop: 30,
+    marginBottom: 120,
+    marginHorizontal: 15,
+    backgroundColor: colors.white,
+    borderRadius: 6,
+    overflow: 'hidden'
+  },
   lineWrapper: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    paddingTop: 30,
+    paddingBottom: 15,
+    paddingHorizontal: 20,
+    borderColor: colors.backgroundGrey,
+    borderWidth: 1
   },
   line: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignContent: 'flex-start',
-    justifyContent: 'center',
-    marginBottom: 50,
-    width: 300
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   lineText: {
     backgroundColor: 'transparent',
-    color: colors.white,
+    color: colors.black,
     fontFamily: mainFontFamily,
     fontSize: 20,
+    fontWeight: '700',
     width: '100%',
     textAlign: 'center',
     marginBottom: 20
   },
   playerWrapper: {
     flexDirection: 'column',
-    marginHorizontal: 5,
-    marginTop: 10,
-    marginBottom: 15
+    marginBottom: 30
+  },
+  goalkeepers: {
   }
 })

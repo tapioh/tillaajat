@@ -12,7 +12,7 @@ import {
   CHANGE_SCREEN_DURATION_IN_MS
 } from './constants'
 import PickScreen from '../containers/Club/PickScreen'
-import LineUp from '../containers/Club/LineUp'
+import LineUpScreen from '../containers/Club/LineUpScreen'
 
 const backgroundImage = require('../assets/images/app-background.jpg')
 
@@ -47,7 +47,7 @@ class Navigator extends React.Component {
       <Image source={backgroundImage} style={styles.backgroundImage}>
         <Animated.View style={viewFade}>
           {screen === 'PickScreen' && <PickScreen />}
-          {screen === 'LineUp' && <LineUp />}
+          {screen === 'LineUpScreen' && <LineUpSCreen />}
         </Animated.View>
       </Image>
     )
