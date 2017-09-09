@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Spinner from 'react-native-spinkit'
+import * as Animatable from 'react-native-animatable'
 import {
   View,
   Image,
@@ -15,8 +16,9 @@ import { colors, mainFontFamily } from '../../../../../styles'
 
 const SPINNER_SIZE_IN_PX = 50
 const SPINNER_TYPE = 'Bounce'
+const ENTER_ANIMATION_DURATION_IN_MS = 500
 
-export default class ImageNotificationModal extends React.Component {
+class ImageNotificationModal extends React.Component {
   render() {
     const { showModal, pictureSaveState, onPressContinueButton } =  this.props
     return (
@@ -31,12 +33,12 @@ export default class ImageNotificationModal extends React.Component {
           }
           {
             pictureSaveState === PICTURE_SAVE_STATE_SAVED &&
-            <View style={styles.modalContent}>
+            <Animatable.View animation='fadeInUp' duration={ENTER_ANIMATION_DURATION_IN_MS} style={styles.modalContent}>
               <Text style={styles.modalImageText}>Kuva tallennettu</Text>
               <Button onPress={onPressContinueButton}>
                 ALOITA ALUSTA
               </Button>
-            </View>
+            </Animatable.View>
           }
         </View>
       </Modal>
@@ -50,13 +52,16 @@ ImageNotificationModal.propTypes = {
   onPressContinueButton: PropTypes.func.isRequired
 }
 
+export default Animatable.createAnimatableComponent(ImageNotificationModal)
+
 const styles = StyleSheet.create({
   modal: {
     paddingVertical: 20,
     height: 150,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    overflow: 'hidden'
   },
   modalContent: {
     flexDirection: 'column',
