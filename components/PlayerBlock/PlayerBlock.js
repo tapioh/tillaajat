@@ -7,7 +7,7 @@ import {
   StyleSheet
 } from 'react-native'
 import { getProfileImageForFacebookId } from '../../util'
-import { PLAYER_BLOCK_HEIGHT_IN_PX, PLAYER_BLOCK_WIDTH_IN_PX } from '../../constants'
+import { PLAYER_BLOCK_WIDTH_IN_PX } from '../../constants'
 import { mainFontFamily, colors } from '../../styles'
 
 const PLAYER_IMAGE_SIZE_IN_PX = 60

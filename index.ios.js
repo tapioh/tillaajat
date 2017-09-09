@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
-import { registerScreens, PICK_SCREEN, PICK_SCREEN_TITLE } from './screens'
+import { registerScreens, PICK_SCREEN } from './screens'
 import { colors, mainFontFamily } from './styles'
 import configureStore from './store'
 
