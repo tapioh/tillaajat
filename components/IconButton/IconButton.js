@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { colors } from '../../styles'
 
-export default class TillaajatButton extends React.Component {
+export default class IconButton extends React.Component {
   render() {
     return (
       <TouchableOpacity onPress={this.props.onPress}>
@@ -32,7 +32,7 @@ export default class TillaajatButton extends React.Component {
   }
 }
 
-TillaajatButton.propTypes = {
+IconButton.propTypes = {
   iconSrc: PropTypes.number.isRequired,
   iconWidth: PropTypes.number.isRequired,
   iconHeight: PropTypes.number.isRequired

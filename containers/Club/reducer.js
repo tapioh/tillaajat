@@ -2,7 +2,7 @@ import {
   TOGGLE_PLAYER,
   RESET_PLAYERS,
   GENERATE_LINEUP,
-  GENERATE_LINEUP_STATUS
+  RESET_LINEUP
 } from './constants'
 import players from '../../players'
 import _ from 'lodash'
@@ -10,7 +10,6 @@ import _ from 'lodash'
 const initialState = {
   players,
   selectedPlayers: [],
-  lineUpStatus: '',
   lineUp: {
     lines: [],
     goalkeepers: []
@@ -32,8 +31,8 @@ export default function club(state = initialState, action) {
       return {...state, selectedPlayers: []}
     case GENERATE_LINEUP:
       return {...state, lineUp: action.data}
-    case GENERATE_LINEUP_STATUS:
-      return {...state, lineUpStatus: action.data}
+    case RESET_LINEUP:
+      return {...state, lineUp: initialState.lineUp}
     default:
       return state
   }

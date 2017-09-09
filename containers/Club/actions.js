@@ -2,10 +2,8 @@ import {
   TOGGLE_PLAYER,
   RESET_PLAYERS,
   GENERATE_LINEUP,
-  GENERATE_LINEUP_STATUS,
-  REQUEST_GENERATE_LINEUP,
-  RECEIVE_GENERATE_LINEUP,
-  GENERATE_LINEUP_DURATION_IN_MS
+  GENERATE_LINEUP_DURATION_IN_MS,
+  RESET_LINEUP
 } from './constants'
 import { lineUpGenerator } from '../../util'
 
@@ -24,21 +22,17 @@ export function resetPlayers() {
 
 export function generateLineUp(players, selectedPlayers) {
   return async dispatch => {
-    dispatch({
-      type: GENERATE_LINEUP_STATUS,
-      data: REQUEST_GENERATE_LINEUP
-    })
     setTimeout(() => {
       dispatch({
         type: GENERATE_LINEUP,
         data: lineUpGenerator(players, selectedPlayers)
       })
     }, GENERATE_LINEUP_DURATION_IN_MS)
-    setTimeout(() => {
-      dispatch({
-        type: GENERATE_LINEUP_STATUS,
-        data: RECEIVE_GENERATE_LINEUP
-      })
-    }, GENERATE_LINEUP_DURATION_IN_MS * 2)
+  }
+}
+
+export function resetLineUp() {
+  return {
+    type: RESET_LINEUP
   }
 }

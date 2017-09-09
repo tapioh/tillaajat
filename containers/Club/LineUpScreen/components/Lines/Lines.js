@@ -7,11 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native'
-import {
-  GENERATE_LINEUP_DURATION_IN_MS,
-  REQUEST_GENERATE_LINEUP,
-  RECEIVE_GENERATE_LINEUP
-} from '../../../constants'
 import { colors, mainFontFamily } from '../../../../../styles'
 import PlayerBlock from '../../../../../components/PlayerBlock'
 
@@ -19,39 +14,17 @@ const FADE_IN_DURATION_IN_MS = 300
 
 export default class Lines extends React.Component {
   state = {
-    lineUpFade: new Animated.Value(0),
-    lineUpTransform: new Animated.Value(0.5)
+    lineUpFade: new Animated.Value(0.5)
   }
 
-  componentWillReceiveProps(nextProps) {
-    switch (nextProps.lineUpStatus) {
-      case REQUEST_GENERATE_LINEUP:
-        Animated.parallel([
-          Animated.timing(this.state.lineUpFade, {
-            toValue: 0,
-            duration: GENERATE_LINEUP_DURATION_IN_MS
-          }).start(),
-          Animated.timing(this.state.lineUpTransform, {
-            toValue: 0.5
-          }).start()
-        ])
-        break
-      case RECEIVE_GENERATE_LINEUP:
-        Animated.parallel([
-          Animated.timing(this.state.lineUpFade, {
-            toValue: 1,
-            duration: FADE_IN_DURATION_IN_MS
-          }).start(),
-          Animated.spring(this.state.lineUpTransform, {
-            toValue: 1
-          }).start()
-        ])
-        break
+  componentDidMount() {
+    const hasLines = this.props.lineUp.lines.length > 0
+    if (hasLines) {
+      Animated.timing(this.state.lineUpFade, {
+        toValue: 1,
+        duration: FADE_IN_DURATION_IN_MS
+      }).start()
     }
-  }
-
-  onLongPressPlayer(player) {
-    console.warn('LONG PRESS', player)
   }
 
   renderLine(line) {
@@ -65,7 +38,7 @@ export default class Lines extends React.Component {
   renderPlayer(player) {
     return (
       <View style={styles.playerWrapper}>
-        <TouchableOpacity onLongPress={() => this.onLongPressPlayer(player)}>
+        <TouchableOpacity>
           <View>
             {
               player &&
@@ -82,8 +55,7 @@ export default class Lines extends React.Component {
   render() {
     const { lines, goalkeepers } =  this.props.lineUp
     const lineUpAnimation = {
-      opacity: this.state.lineUpFade,
-      transform: [{ scale: this.state.lineUpTransform }]
+      opacity: this.state.lineUpFade
     }
 
     return (
@@ -98,7 +70,7 @@ export default class Lines extends React.Component {
             </View>
           })
         }
-        <View style={[styles.lineWrapper, styles.goalkeepers]}>
+        <View style={[styles.lineWrapper, styles.goalkeepersWrapper]}>
           <Text style={styles.lineText}>{goalkeepers.length > 1 ? 'MAALIVAHDIT' : 'MAALIVAHTI'}</Text>
           <View style={styles.line}>
             {
@@ -116,31 +88,22 @@ export default class Lines extends React.Component {
 }
 
 Lines.propTypes = {
-  lineUp: PropTypes.object.isRequired,
-  lineUpStatus: PropTypes.string.isRequired
+  lineUp: PropTypes.object.isRequired
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center'
-  },
   linesWrapper: {
-    marginTop: 30,
-    marginBottom: 120,
-    marginHorizontal: 15,
-    backgroundColor: colors.white,
-    borderRadius: 6,
-    overflow: 'hidden'
+    marginVertical: 15,
+    marginHorizontal: 15
   },
   lineWrapper: {
     flexDirection: 'column',
-    paddingTop: 30,
-    paddingBottom: 15,
-    paddingHorizontal: 20,
-    borderColor: colors.backgroundGrey,
-    borderWidth: 1
+    paddingTop: 20,
+    paddingBottom: 0,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+    borderRadius: 6,
+    backgroundColor: colors.white
   },
   line: {
     flexDirection: 'row',
@@ -156,12 +119,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     width: '100%',
     textAlign: 'center',
-    marginBottom: 20
+    marginBottom: 30
   },
   playerWrapper: {
     flexDirection: 'column',
-    marginBottom: 30
+    marginBottom: 35
   },
-  goalkeepers: {
+  goalkeepersWrapper: {
+    marginBottom: 0
   }
 })

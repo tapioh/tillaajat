@@ -1,3 +1,5 @@
+import { Platform } from 'react-native'
+
 export const POSITION_LEFT_WING = 1
 export const POSITION_CENTER = 2
 export const POSITION_RIGHT_WING = 3
@@ -16,7 +18,7 @@ export const POSITION_STRINGS = {
   [POSITION_OTHER]: 'MUU'
 }
 
-export const HEADER_HEIGHT_IN_PX = 75
+export const HEADER_HEIGHT_IN_PX = Platform.OS !== 'ios' ? 54 : 64
 export const PLAYER_ROW_HEIGHT_IN_PX = 45
 export const PLAYER_ACTIONS_WIDTH_IN_PX = 110
 export const PLAYER_BLOCK_HEIGHT_IN_PX = 100

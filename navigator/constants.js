@@ -1,6 +1,0 @@
-export const CHANGE_SCREEN = 'CHANGE_SCREEN'
-export const CHANGE_SCREEN_START = 'CHANGE_SCREEN_START'
-export const CHANGE_SCREEN_END = 'CHANGE_SCREEN_END'
-export const CHANGE_SCREEN_DURATION_IN_MS = 500
-export const SCREEN_PICK_SCREEN = 'PickScreen'
-export const SCREEN_LINE_UP = 'LineUp'

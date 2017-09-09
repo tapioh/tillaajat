@@ -5,7 +5,6 @@ import {
   Image,
   Text,
   StyleSheet,
-  Platform,
   Dimensions
 } from 'react-native'
 import { getProfileImageForFacebookId } from '../../util'
@@ -21,7 +20,9 @@ export default class PlayerRow extends React.Component {
     return (
       <View style={styles.playerRow}>
         <Image source={imageSource} style={styles.playerImage} />
-        <Text style={styles.playerText}>#{number} {name}</Text>
+        <Text style={styles.playerText}>
+          <Text style={styles.playerNumberText}>#{number}</Text> {name}
+        </Text>
       </View>
     )
   }
@@ -40,6 +41,7 @@ const styles = StyleSheet.create({
     maxWidth: screenWidth - PLAYER_ACTIONS_WIDTH_IN_PX
   },
   playerImage: {
+    backgroundColor: colors.darkGrey,
     width: PLAYER_ROW_HEIGHT_IN_PX,
     height: PLAYER_ROW_HEIGHT_IN_PX,
     borderRadius: PLAYER_ROW_HEIGHT_IN_PX / 2,
@@ -52,5 +54,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'left',
     lineHeight: PLAYER_ROW_HEIGHT_IN_PX
+  },
+  playerNumberText: {
+    fontWeight: '500',
+    color: colors.darkGrey
   }
 })

@@ -10,7 +10,7 @@ import { getProfileImageForFacebookId } from '../../util'
 import { PLAYER_BLOCK_HEIGHT_IN_PX, PLAYER_BLOCK_WIDTH_IN_PX } from '../../constants'
 import { mainFontFamily, colors } from '../../styles'
 
-const PLAYER_IMAGE_SIZE_IN_PX = 45
+const PLAYER_IMAGE_SIZE_IN_PX = 60
 
 export default class PlayerBlock extends React.Component {
   render() {
@@ -20,7 +20,9 @@ export default class PlayerBlock extends React.Component {
     return (
       <View style={styles.playerBlock}>
         <Image source={imageSource} style={styles.playerImage} />
-        <Text style={styles.playerText}>#{number} {firstName}</Text>
+        <Text style={styles.playerText}>
+          <Text style={styles.playerNumberText}>#{number}</Text> {firstName}
+        </Text>
       </View>
     )
   }
@@ -39,14 +41,21 @@ const styles = StyleSheet.create({
   playerImage: {
     width: PLAYER_IMAGE_SIZE_IN_PX,
     height: PLAYER_IMAGE_SIZE_IN_PX,
-    borderRadius: PLAYER_IMAGE_SIZE_IN_PX / 2
+    borderRadius: PLAYER_IMAGE_SIZE_IN_PX / 2,
+    marginBottom: 10,
+    backgroundColor: colors.darkGrey
   },
   playerText: {
     color: colors.black,
     fontFamily: mainFontFamily,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '700',
     textAlign: 'center',
     width: PLAYER_BLOCK_WIDTH_IN_PX
+  },
+  playerNumberText: {
+    fontWeight: '500',
+    color: colors.darkGrey
   }
 })
+

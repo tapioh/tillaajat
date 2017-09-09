@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { generateLineUp } from '../../../actions'
 import {
   View,
   Image,
@@ -12,6 +11,7 @@ import {
   Dimensions
 } from 'react-native'
 import FloatingElement from '../../../../../components/FloatingElement'
+import { LINE_UP_SCREEN, LINE_UP_SCREEN_TITLE } from '../../../../../screens'
 import { getProfileImageForFacebookId } from '../../../../../util'
 import { mainFontFamily, colors } from '../../../../../styles'
 
@@ -26,8 +26,10 @@ const MIN_PLAYERS_COUNT = 6
 
 class PlayerPool extends React.Component {
   onPressGenerateButton() {
-    const { generateLineUp, players, selectedPlayers } = this.props
-    generateLineUp(players, selectedPlayers)
+    this.props.navigator.push({
+      screen: LINE_UP_SCREEN,
+      title: LINE_UP_SCREEN_TITLE
+    })
   }
 
   render() {
@@ -42,7 +44,7 @@ class PlayerPool extends React.Component {
           <View style={styles.playerPoolEmpty}>
             <Text style={styles.playerPoolEmptyTitle}>VALITSE PELAAJAT</Text>
             <Text style={styles.playerPoolEmptyText}>Kuka on in, kuka out?</Text>
-            <Text style={styles.playerPoolEmptyText}>Merkkaa init ja generoi kokkari.</Text>
+            <Text style={styles.playerPoolEmptyText}>Merkkaa init ja generoi kokoonpano.</Text>
           </View>
         }
         {
@@ -100,7 +102,8 @@ class PlayerPool extends React.Component {
 PlayerPool.propTypes = {
   players: PropTypes.array.isRequired,
   floatingPlayers: PropTypes.any.isRequired,
-  selectedPlayers: PropTypes.array.isRequired
+  selectedPlayers: PropTypes.array.isRequired,
+  navigator: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
@@ -117,11 +120,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  generateLineUp: (players, selectedPlayers) => { return dispatch(generateLineUp(players, selectedPlayers)) }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlayerPool)
+export default connect(mapStateToProps, null)(PlayerPool)
 
 const styles = StyleSheet.create({
   playerPoolContainer: {
@@ -184,13 +183,13 @@ const styles = StyleSheet.create({
     left: 0,
     width: PLAYER_IMAGE_WIDTH_IN_PX,
     height: PLAYER_IMAGE_WIDTH_IN_PX,
-    borderRadius: PLAYER_IMAGE_WIDTH_IN_PX / 2,
-    backgroundColor: colors.backgroundGrey
+    borderRadius: PLAYER_IMAGE_WIDTH_IN_PX / 2
   },
   playerImage: {
     width: PLAYER_IMAGE_WIDTH_IN_PX,
     height: PLAYER_IMAGE_WIDTH_IN_PX,
-    borderRadius: PLAYER_IMAGE_WIDTH_IN_PX / 2
+    borderRadius: PLAYER_IMAGE_WIDTH_IN_PX / 2,
+    backgroundColor: colors.darkGrey
   },
   selectedPlayersCountContainer: {
     height: PLAYER_POOL_ACTIONS_HEIGHT_IN_PX - 16,

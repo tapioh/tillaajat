@@ -10,7 +10,6 @@ import {
 } from 'react-native'
 import PlayerPool from './components/PlayerPool'
 import PlayerPicker from './components/PlayerPicker'
-import LineUpScreen from '../LineUpScreen'
 import { colors } from '../../../styles'
 
 const PLAYER_POOL_CONTAINER_HEIGHT_IN_PX = 240
@@ -20,35 +19,29 @@ const topIllustrationImage = require('../../../assets/images/app-top-illustratio
 class PickScreen extends React.Component {
   render() {
     const playersOrdered = _.sortBy(this.props.players, 'number')
-    const hasLines = this.props.lineUp.lines.length > 0
     return (
-      <View>
+      <View style={styles.pickScreen}>
         <Image source={topIllustrationImage} style={styles.topIllustrationImage} />
-        {
-          !hasLines &&
-          <View>
-            <View style={styles.playerPoolWrapper}>
-              { !hasLines && <PlayerPool /> }
-
-            </View>
-            <View style={styles.playerPickerWrapper}>
-              <PlayerPicker players={playersOrdered} />
-            </View>
+        <View>
+          <View style={styles.playerPoolWrapper}>
+            <PlayerPool navigator={this.props.navigator} />
           </View>
-        }
-        { hasLines && <LineUpScreen /> }
+          <View style={styles.playerPickerWrapper}>
+            <PlayerPicker players={playersOrdered} />
+          </View>
+        </View>
       </View>
     )
   }
 }
 
 PickScreen.propTypes = {
-  players: PropTypes.array.isRequired
+  players: PropTypes.array.isRequired,
+  navigator: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
   return {
-    lineUp: state.club.lineUp,
     players: state.club.players
   }
 }
@@ -56,6 +49,9 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, null)(PickScreen)
 
 const styles = StyleSheet.create({
+  pickScreen: {
+    backgroundColor: colors.backgroundGrey
+  },
   topIllustrationImage: {
     height: 390,
     width: '100%',
