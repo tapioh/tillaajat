@@ -2,7 +2,13 @@ import {
   TOGGLE_PLAYER,
   RESET_PLAYERS,
   GENERATE_LINEUP,
-  RESET_LINEUP
+  RESET_LINEUP,
+  ANIMATE_LINEUP_IN,
+  ANIMATE_LINEUP_OUT_START,
+  ANIMATE_LINEUP_OUT_END,
+  LINEUP_SCREEN_STATUS_ANIMATE_OUT,
+  LINEUP_SCREEN_STATUS_HIDDEN,
+  LINEUP_SCREEN_STATUS_VISIBLE
 } from './constants'
 import players from '../../players'
 import _ from 'lodash'
@@ -13,7 +19,8 @@ const initialState = {
   lineUp: {
     lines: [],
     goalkeepers: []
-  }
+  },
+  lineUpScreenStatus: LINEUP_SCREEN_STATUS_HIDDEN
 }
 
 export default function club(state = initialState, action) {
@@ -33,6 +40,12 @@ export default function club(state = initialState, action) {
       return {...state, lineUp: action.data}
     case RESET_LINEUP:
       return {...state, lineUp: initialState.lineUp}
+    case ANIMATE_LINEUP_OUT_START:
+      return {...state, lineUpScreenStatus: LINEUP_SCREEN_STATUS_ANIMATE_OUT}
+    case ANIMATE_LINEUP_OUT_END:
+      return {...state, lineUpScreenStatus: LINEUP_SCREEN_STATUS_HIDDEN}
+    case ANIMATE_LINEUP_IN:
+      return {...state, lineUpScreenStatus: LINEUP_SCREEN_STATUS_VISIBLE}
     default:
       return state
   }

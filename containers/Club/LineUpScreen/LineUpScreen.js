@@ -10,9 +10,16 @@ import {
   StyleSheet,
   Dimensions
 } from 'react-native'
-import { generateLineUp, resetLineUp, resetPlayers } from '../actions'
+import {
+  generateLineUp,
+  resetLineUp,
+  resetPlayers,
+  animateLineUpIn,
+  animateLineUpOut
+} from '../actions'
+import { LINEUP_SCREEN_STATUS_ANIMATE_OUT } from '../constants'
 import { PICTURE_SAVE_STATE_LOADING, PICTURE_SAVE_STATE_SAVED } from './constants'
-import { NAVIGATOR_BUTTONS, GENERATE_BUTTON_ID, SAVE_BUTTON_ID } from './navigatorButtons'
+import { NAVIGATOR_BUTTONS, RELOAD_BUTTON_ID, DOWNLOAD_BUTTON_ID } from './navigatorButtons'
 import Lines from './components/Lines'
 import ImageNotificationModal from './components/ImageNotificationModal'
 import { colors } from '../../../styles'
@@ -32,18 +39,18 @@ class LineUpScreen extends React.Component {
 
   componentDidMount() {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
-    const { generateLineUp, players, selectedPlayers } = this.props
-    generateLineUp(players, selectedPlayers)
+    const { showLineUp, players, selectedPlayers } = this.props
+    showLineUp(players, selectedPlayers)
   }
 
   onNavigatorEvent(event) {
     if (event.type === 'NavBarButtonPress') {
       switch (event.id) {
-        case GENERATE_BUTTON_ID:
-          this.onPressGenerateButton()
+        case RELOAD_BUTTON_ID:
+          this.onPressReloadButton()
           break
-        case SAVE_BUTTON_ID:
-          this.onPressSaveButton()
+        case DOWNLOAD_BUTTON_ID:
+          this.onPressDownloadButton()
           break
         default:
           return null
@@ -54,13 +61,12 @@ class LineUpScreen extends React.Component {
     }
   }
 
-  onPressGenerateButton = () => {
-    const { resetLineUp, generateLineUp, players, selectedPlayers } = this.props
-    resetLineUp()
-    generateLineUp(players, selectedPlayers)
+  onPressReloadButton = () => {
+    const { reloadLineUp, players, selectedPlayers } = this.props
+    reloadLineUp(players, selectedPlayers)
   }
 
-  onPressSaveButton = () => {
+  onPressDownloadButton = () => {
     this.setState({
       pictureSaveState: PICTURE_SAVE_STATE_LOADING
     })
@@ -97,22 +103,25 @@ class LineUpScreen extends React.Component {
 
   render() {
     const { pictureSaveState } = this.state
+    const { lineUp, lineUpScreenStatus } = this.props
     const hasLines = this.props.lineUp.lines.length > 0
+    const animateLineUpOut = this.props.lineUpScreenStatus === LINEUP_SCREEN_STATUS_ANIMATE_OUT
+    const showLines = hasLines || animateLineUpOut
     const showModal = pictureSaveState !== ''
     return (
       <View style={styles.container}>
         {
-          !hasLines &&
+          !showLines &&
           <Spinner style={styles.spinner}
                    size={SPINNER_SIZE_IN_PX}
                    type={SPINNER_TYPE}
                    color={colors.black} />
         }
         {
-          hasLines &&
+          showLines &&
           <ScrollView ref={component => this.scrollView = component}
                       collapsable={false}>
-            <Lines lineUp={this.props.lineUp} />
+            <Lines lineUp={lineUp} lineUpScreenStatus={lineUpScreenStatus} />
           </ScrollView>
         }
         <ImageNotificationModal showModal={showModal}
@@ -126,18 +135,31 @@ class LineUpScreen extends React.Component {
 LineUpScreen.propTypes = {
   lineUp: PropTypes.object.isRequired,
   players: PropTypes.array.isRequired,
-  selectedPlayers: PropTypes.array.isRequired
+  selectedPlayers: PropTypes.array.isRequired,
+
 }
 
 const mapStateToProps = state => {
-  const { lineUp, players, selectedPlayers } = state.club
-  return { lineUp, players, selectedPlayers }
+  const { lineUp, lineUpScreenStatus, players, selectedPlayers } = state.club
+  return { lineUp, lineUpScreenStatus, players, selectedPlayers }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  generateLineUp: (players, selectedPlayers) => { dispatch(generateLineUp(players, selectedPlayers)) },
+  showLineUp: (players, selectedPlayers) => {
+    dispatch(generateLineUp(players, selectedPlayers)).then(() => {
+      dispatch(animateLineUpIn())
+    })
+  },
   resetLineUp: () => { dispatch(resetLineUp()) },
-  resetPlayers: () => { dispatch(resetPlayers()) }
+  resetPlayers: () => { dispatch(resetPlayers()) },
+  reloadLineUp: (players, selectedPlayers) => {
+    dispatch(animateLineUpOut()).then(() => {
+      dispatch(resetLineUp())
+      dispatch(generateLineUp(players, selectedPlayers)).then(() => {
+        dispatch(animateLineUpIn())
+      })
+    })
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LineUpScreen)

@@ -9,8 +9,7 @@ import {
 import * as Animatable from 'react-native-animatable'
 import { colors, mainFontFamily } from '../../../../../styles'
 import PlayerBlock from '../../../../../components/PlayerBlock'
-
-const ENTER_ANIMATION_DURATION_IN_MS = 500
+import { LINEUP_ANIMATION_DURATION_IN_MS } from '../../../constants'
 
 function renderLine(line) {
   return (
@@ -48,10 +47,10 @@ function renderPlayer(player) {
 
 class Line extends React.Component {
   render() {
-    const { line, lineNumber, lineText, enterDelay } =  this.props
+    const { line, lineNumber, lineText, animationName, enterDelay } =  this.props
     const lineString = lineNumber ? `${lineNumber}. ${lineText}` : lineText
     return (
-      <Animatable.View animation='fadeInLeft' duration={ENTER_ANIMATION_DURATION_IN_MS} delay={enterDelay} style={styles.lineWrapper}>
+      <Animatable.View animation={animationName} duration={LINEUP_ANIMATION_DURATION_IN_MS} delay={enterDelay} style={styles.lineWrapper}>
         <Text style={styles.lineText}>{lineString}</Text>
         {renderLine(line)}
       </Animatable.View>
@@ -66,7 +65,8 @@ Line.propTypes = {
   ]).isRequired,
   lineText: PropTypes.string.isRequired,
   lineNumber: PropTypes.number,
-  enterDelay: PropTypes.number
+  animationName: PropTypes.string.isRequired,
+  enterDelay: PropTypes.number,
 }
 
 export default Animatable.createAnimatableComponent(Line)

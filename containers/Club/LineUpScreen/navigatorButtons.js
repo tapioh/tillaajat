@@ -1,15 +1,15 @@
-export const GENERATE_BUTTON_ID = 'BUTTON_GENERATE'
-export const SAVE_BUTTON_ID = 'BUTTON_SAVE'
+export const RELOAD_BUTTON_ID = 'BUTTON_RELOAD'
+export const DOWNLOAD_BUTTON_ID = 'BUTTON_DOWNLOAD'
 
 export const NAVIGATOR_BUTTONS = {
   rightButtons: [
     {
-      icon: require('../../../assets/icons/icon-dark-generate.png'),
-      id: GENERATE_BUTTON_ID
+      icon: require('../../../assets/icons/icon-blue-reload.png'),
+      id: RELOAD_BUTTON_ID
     },
     {
-      icon: require('../../../assets/icons/icon-dark-download.png'),
-      id: SAVE_BUTTON_ID
+      icon: require('../../../assets/icons/icon-blue-download.png'),
+      id: DOWNLOAD_BUTTON_ID
     }
   ]
 };
