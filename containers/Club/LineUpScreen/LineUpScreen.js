@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { takeSnapshot } from "react-native-view-shot"
-import Spinner from 'react-native-spinkit'
 import {
   View,
   ScrollView,
@@ -17,6 +16,7 @@ import {
   animateLineUpIn,
   animateLineUpOut
 } from '../actions'
+import Loader from '../../../components/Loader'
 import { LINEUP_SCREEN_STATUS_ANIMATE_OUT } from '../constants'
 import { PICTURE_SAVE_STATE_LOADING, PICTURE_SAVE_STATE_SAVED } from './constants'
 import { NAVIGATOR_BUTTONS, RELOAD_BUTTON_ID, DOWNLOAD_BUTTON_ID } from './navigatorButtons'
@@ -26,8 +26,6 @@ import { colors } from '../../../styles'
 import { HEADER_HEIGHT_IN_PX } from '../../../constants'
 
 const screenHeight = Dimensions.get('window').height
-const SPINNER_SIZE_IN_PX = 25
-const SPINNER_TYPE = 'Bounce'
 const POP_WAIT_DURATION_IN_MS = 150
 
 class LineUpScreen extends React.Component {
@@ -112,10 +110,7 @@ class LineUpScreen extends React.Component {
       <View style={styles.container}>
         {
           !showLines &&
-          <Spinner style={styles.spinner}
-                   size={SPINNER_SIZE_IN_PX}
-                   type={SPINNER_TYPE}
-                   color={colors.black} />
+          <Loader />
         }
         {
           showLines &&

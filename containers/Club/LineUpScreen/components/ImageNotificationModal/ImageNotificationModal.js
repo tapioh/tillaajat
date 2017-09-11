@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Spinner from 'react-native-spinkit'
 import * as Animatable from 'react-native-animatable'
 import {
   View,
@@ -11,11 +10,10 @@ import {
 } from 'react-native'
 import { PICTURE_SAVE_STATE_LOADING, PICTURE_SAVE_STATE_SAVED } from '../../constants'
 import Modal from '../../../../../components/Modal'
+import Loader from '../../../../../components/Loader'
 import Button from '../../../../../components/Button'
-import { colors, mainFontFamily } from '../../../../../styles'
+import { mainFontFamily } from '../../../../../styles'
 
-const SPINNER_SIZE_IN_PX = 50
-const SPINNER_TYPE = 'Bounce'
 const ENTER_ANIMATION_DURATION_IN_MS = 500
 
 class ImageNotificationModal extends React.Component {
@@ -26,10 +24,7 @@ class ImageNotificationModal extends React.Component {
         <View style={styles.modal}>
           {
             pictureSaveState === PICTURE_SAVE_STATE_LOADING &&
-            <Spinner style={styles.spinner}
-                     size={SPINNER_SIZE_IN_PX}
-                     type={SPINNER_TYPE}
-                     color={colors.black} />
+            <Loader />
           }
           {
             pictureSaveState === PICTURE_SAVE_STATE_SAVED &&
@@ -67,10 +62,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  spinner: {
-    width: SPINNER_SIZE_IN_PX + 13,
-    height: SPINNER_SIZE_IN_PX + 13
   },
   modalImageText: {
     flexDirection: 'column',
