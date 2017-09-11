@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native'
-import { colors } from '../../styles'
+import { colors, shadows } from '../../styles'
 
 export default class IconButton extends React.Component {
   render() {
     return (
       <TouchableOpacity onPress={this.props.onPress}>
-        <View style={styles.buttonWrapper}>
+        <View style={[styles.buttonWrapper, shadows.buttonShadow]}>
           {
             this.props.iconSrc &&
             <Image style={[
@@ -45,15 +45,7 @@ const styles = StyleSheet.create({
     height: 55,
     backgroundColor: colors.white,
     borderWidth: 0,
-    borderRadius: 55,
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 0
-    },
-    shadowRadius: 20,
-    shadowOpacity: 0.7,
-    elevation: 1
+    borderRadius: 55
   },
   buttonIcon: {
     position: 'absolute',
