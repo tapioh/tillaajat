@@ -39,6 +39,7 @@ export default class Lines extends React.Component {
         <View style={styles.goalkeepersWrapper}>
           <Line line={goalkeepers}
                 lineText={goalkeepersLineText}
+                animationName={animationName}
                 enterDelay={goalkeepersEnterDelay}/>
         </View>
       </View>
