@@ -4,25 +4,22 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import {
   View,
-  Image,
   Text,
   TouchableOpacity,
-  StyleSheet,
-  Dimensions
+  StyleSheet
 } from 'react-native'
-import FloatingElement from '../../../../../components/FloatingElement'
+import FloatingPlayer from './components/FloatingPlayer'
 import { LINE_UP_SCREEN, LINE_UP_SCREEN_TITLE } from '../../../../../screens'
-import { getProfileImageForFacebookId } from '../../../../../util'
-import { mainFontFamily, colors } from '../../../../../styles'
+import { mainFontFamily, colors, shadows } from '../../../../../styles'
+import {
+  PLAYER_POOL_HEIGHT_IN_PX,
+  PLAYER_POOL_WIDTH_IN_PX,
+  PLAYER_POOL_ACTIONS_HEIGHT_IN_PX
+} from './constants'
 
-const screenWidth = Dimensions.get('window').width
-const PLAYER_IMAGE_WIDTH_IN_PX = 80
-const PLAYER_POOL_HEIGHT_IN_PX = 160
-const PLAYER_POOL_MARGIN_IN_PX = 30
-const PLAYER_POOL_WIDTH_IN_PX = screenWidth - PLAYER_POOL_MARGIN_IN_PX
-const PLAYER_POOL_ACTIONS_HEIGHT_IN_PX = 60
 const GENERATE_BUTTON_WIDTH_IN_PX = 120
 const MIN_PLAYERS_COUNT = 6
+const FACTOR_MULTIPLIER = 30
 
 class PlayerPool extends React.Component {
   onPressGenerateButton() {
@@ -33,12 +30,14 @@ class PlayerPool extends React.Component {
   }
 
   render() {
-    const { floatingPlayers, selectedPlayers } = this.props
-    const selectedPlayersCount = selectedPlayers.length
+    const { floatingPlayers } = this.props
+    const selectedPlayersCount = floatingPlayers.length
     const enableGenerateButton = selectedPlayersCount >= MIN_PLAYERS_COUNT
+    const generateButtonStyle = enableGenerateButton ? styles.generateButtonEnabled : styles.generateButtonDisabled
+    const generateButtonCall = enableGenerateButton ? () => this.onPressGenerateButton() : () => false
 
     return (
-      <View style={styles.playerPoolContainer}>
+      <View style={[styles.playerPoolContainer, shadows.mediumBoxShadow]}>
         {
           selectedPlayersCount === 0 &&
           <View style={styles.playerPoolEmpty}>
@@ -53,23 +52,10 @@ class PlayerPool extends React.Component {
             <View style={styles.playerPool}>
               {
                 floatingPlayers.map((player, index) => {
-                  const imageSource = getProfileImageForFacebookId(player.facebookId)
-                  const factorBase = selectedPlayersCount * 30
-                  const factorY = Math.min(factorBase, PLAYER_POOL_HEIGHT_IN_PX / 2)
-                  const factorX = Math.min(factorBase, (screenWidth - PLAYER_POOL_MARGIN_IN_PX) / 2)
-                  const translateY = factorY * _.random(-100, 100) / 100
-                  const translateX = factorX * _.random(-100, 100) / 100
-                  const zIndexStyle = {
-                    zIndex: index + 1
-                  }
-                  return (
-                    <View style={[styles.playerImageWrapper, zIndexStyle]} key={player.number}>
-                      <FloatingElement style={styles.playerImageContent} translateY={translateY}
-                                       translateX={translateX}>
-                        <Image source={imageSource} style={styles.playerImage}/>
-                      </FloatingElement>
-                    </View>
-                  )
+                  const factor = selectedPlayersCount * FACTOR_MULTIPLIER
+                  return <View style={styles.playerImageWrapper} key={index}>
+                    <FloatingPlayer player={player} key={index} index={index} factor={factor} />
+                  </View>
                 })
               }
             </View>
@@ -83,8 +69,8 @@ class PlayerPool extends React.Component {
                 } IN
                 </Text>
               </View>
-              <View style={enableGenerateButton ? styles.generateButtonEnabled : styles.generateButtonDisabled}>
-                <TouchableOpacity onPress={() => enableGenerateButton ? this.onPressGenerateButton() : false }
+              <View style={generateButtonStyle}>
+                <TouchableOpacity onPress={generateButtonCall}
                                   style={styles.generateButton}>
                   <View>
                     <Text style={styles.generateButtonText}>Generoi</Text>
@@ -102,7 +88,6 @@ class PlayerPool extends React.Component {
 PlayerPool.propTypes = {
   players: PropTypes.array.isRequired,
   floatingPlayers: PropTypes.any.isRequired,
-  selectedPlayers: PropTypes.array.isRequired,
   navigator: PropTypes.object
 }
 
@@ -115,8 +100,7 @@ const mapStateToProps = (state) => {
 
   return {
     players,
-    floatingPlayers,
-    selectedPlayers
+    floatingPlayers
   }
 }
 
@@ -126,15 +110,7 @@ const styles = StyleSheet.create({
   playerPoolContainer: {
     backgroundColor: colors.white,
     borderWidth: 0,
-    borderRadius: 6,
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 0
-    },
-    shadowRadius: 5,
-    shadowOpacity: 0.2,
-    elevation: 1
+    borderRadius: 6
   },
   playerPoolEmpty: {
     justifyContent: 'center',
@@ -177,19 +153,6 @@ const styles = StyleSheet.create({
   },
   playerImageWrapper: {
     position: 'absolute'
-  },
-  playerImageContent: {
-    top: 0,
-    left: 0,
-    width: PLAYER_IMAGE_WIDTH_IN_PX,
-    height: PLAYER_IMAGE_WIDTH_IN_PX,
-    borderRadius: PLAYER_IMAGE_WIDTH_IN_PX / 2
-  },
-  playerImage: {
-    width: PLAYER_IMAGE_WIDTH_IN_PX,
-    height: PLAYER_IMAGE_WIDTH_IN_PX,
-    borderRadius: PLAYER_IMAGE_WIDTH_IN_PX / 2,
-    backgroundColor: colors.darkGrey
   },
   selectedPlayersCountContainer: {
     height: PLAYER_POOL_ACTIONS_HEIGHT_IN_PX - 16,
