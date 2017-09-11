@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontFamily: mainFontFamily,
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: '500',
     textAlign: 'left',
     lineHeight: PLAYER_ROW_HEIGHT_IN_PX
   },

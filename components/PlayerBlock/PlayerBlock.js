@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontFamily: mainFontFamily,
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '500',
     textAlign: 'center',
     width: PLAYER_BLOCK_WIDTH_IN_PX
   },
