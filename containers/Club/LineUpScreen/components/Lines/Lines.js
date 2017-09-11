@@ -5,11 +5,11 @@ import {
   StyleSheet
 } from 'react-native'
 import Line from '../Line'
-import { LINEUP_SCREEN_STATUS_VISIBLE } from '../../../constants'
+import { LINEUP_SCREEN_STATUS_VISIBLE, LINEUP_ANIMATION_DURATION_IN_MS } from '../../../constants'
 
-const BASE_ENTER_DELAY_IN_MS = 300
+const BASE_ENTER_DELAY_IN_MS = LINEUP_ANIMATION_DURATION_IN_MS / 3
 const ANIMATION_IN_NAME = 'fadeInLeft'
-const ANIMATION_OUT_NAME = 'fadeOutLeftBig'
+const ANIMATION_OUT_NAME = 'fadeOut'
 
 export default class Lines extends React.Component {
   render() {
