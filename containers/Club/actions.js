@@ -11,10 +11,10 @@ import {
 } from './constants'
 import { lineUpGenerator } from '../../util'
 
-export function togglePlayer(player) {
+export function togglePlayer(playerNumber) {
   return {
     type: TOGGLE_PLAYER,
-    data: player
+    data: playerNumber
   }
 }
 

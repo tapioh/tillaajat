@@ -26,8 +26,8 @@ const initialState = {
 export default function club(state = initialState, action) {
   switch (action.type) {
     case TOGGLE_PLAYER:
-      const selectedPlayers = state.selectedPlayers
-      const selectedPlayerNumber = action.data.number
+      const selectedPlayers = state.selectedPlayers.concat([])
+      const selectedPlayerNumber = action.data
       if (_.includes(selectedPlayers, selectedPlayerNumber)) {
         _.remove(selectedPlayers, number => { return number === selectedPlayerNumber })
       } else  {

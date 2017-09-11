@@ -95,7 +95,6 @@ class LineUpScreen extends React.Component {
         animated: true,
         animationType: 'fade'
       })
-      this.props.resetLineUp()
     }, POP_WAIT_DURATION_IN_MS)
   }
 

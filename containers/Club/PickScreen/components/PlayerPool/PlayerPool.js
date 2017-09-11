@@ -86,7 +86,6 @@ class PlayerPool extends React.Component {
 }
 
 PlayerPool.propTypes = {
-  players: PropTypes.array.isRequired,
   floatingPlayers: PropTypes.any.isRequired,
   navigator: PropTypes.object
 }
@@ -99,7 +98,6 @@ const mapStateToProps = (state) => {
   })
 
   return {
-    players,
     floatingPlayers
   }
 }
