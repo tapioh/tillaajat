@@ -54,7 +54,9 @@ class Line extends React.Component {
                        duration={LINEUP_ANIMATION_DURATION_IN_MS}
                        delay={enterDelay}
                        style={[styles.lineWrapper, shadows.defaultBoxShadow]}>
-        <Text style={styles.lineText}>{lineString}</Text>
+        <View style={styles.lineTextWrapper}>
+          <Text style={styles.lineText}>{lineString}</Text>
+        </View>
         {renderLine(line)}
       </Animatable.View>
     )
@@ -76,8 +78,8 @@ export default Animatable.createAnimatableComponent(Line)
 
 const styles = StyleSheet.create({
   lineWrapper: {
-    paddingTop: 20,
-    paddingBottom: 0,
+    paddingTop: 25,
+    paddingBottom: 15,
     paddingHorizontal: 15,
     borderRadius: 6,
     backgroundColor: colors.white
@@ -88,18 +90,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  lineTextWrapper: {
+    borderBottomWidth: 1,
+    borderColor: colors.backgroundGrey,
+    marginBottom: 35
+  },
   lineText: {
-    backgroundColor: 'transparent',
     color: colors.black,
     fontFamily: mainFontFamily,
     fontSize: 20,
     fontWeight: '700',
     width: '100%',
     textAlign: 'center',
-    marginBottom: 30
+    marginBottom: 15
   },
   playerWrapper: {
     flexDirection: 'column',
-    marginBottom: 35
+    marginBottom: 20
   }
 })
