@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import {
   View,
-  StyleSheet,
-  Animated,
-  Easing
+  Animated
 } from 'react-native'
 
 const FLOAT_ANIMATION_LOOP_DURATION_MIN_IN_MS = 2000
@@ -81,7 +79,7 @@ export default class FloatingElement extends React.Component {
     }
 
     return (
-      <Animated.View style={[styles.container, floatingStyle]}>
+      <Animated.View style={floatingStyle}>
         {this.props.children}
       </Animated.View>
     )
@@ -93,9 +91,3 @@ FloatingElement.propTypes = {
   translateY: PropTypes.number.isRequired,
   translateX: PropTypes.number.isRequired
 }
-
-const styles = StyleSheet.create({
-  container: {
-
-  }
-})

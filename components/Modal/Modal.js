@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   StyleSheet,
-  Text,
   View,
   Animated,
   Dimensions
@@ -60,7 +59,7 @@ export default class Modal extends React.Component {
     const containerStyle = {
       opacity: this.state.modalVisibility.interpolate({
         inputRange: [0, 1],
-        outputRange: [0, 1],
+        outputRange: [0, 1]
       })
     }
     const contentStyle = {
@@ -68,10 +67,10 @@ export default class Modal extends React.Component {
         {
           translateY: this.state.contentTranslate.interpolate({
             inputRange: [0, 1],
-            outputRange: [height, 0],
-          }),
-        },
-      ],
+            outputRange: [height, 0]
+          })
+        }
+      ]
     }
 
     const combinedStyle = [containerStyle, styles.modal]

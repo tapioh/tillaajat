@@ -7,8 +7,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
-  Platform
+  StyleSheet
 } from 'react-native'
 import { POSITION_STRINGS, PLAYER_ROW_HEIGHT_IN_PX } from '../../../../../constants'
 import { mainFontFamily, colors } from '../../../../../styles'
