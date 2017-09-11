@@ -15,6 +15,12 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const topIllustrationImage = require('../../../assets/images/app-top-illustration.jpg')
 
 export default class PickScreen extends React.Component {
+  static navigatorStyle = {
+    statusBarTextColorScheme: 'light',
+    statusBarBlur: true,
+    navBarBackgroundColor: colors.white
+  }
+
   render() {
     return (
       <View style={styles.pickScreen}>

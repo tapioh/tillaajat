@@ -13,6 +13,7 @@ Navigation.startSingleScreenApp({
     screen: PICK_SCREEN,
     navigatorStyle: {
       navBarHidden: true,
+      navBarTextColor: colors.black,
       navBarTextFontFamily: mainFontFamily,
       navBarButtonColor: colors.blue,
       navBarButtonFontSize: 18,

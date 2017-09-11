@@ -30,6 +30,9 @@ const POP_WAIT_DURATION_IN_MS = 150
 
 class LineUpScreen extends React.Component {
   static navigatorButtons = NAVIGATOR_BUTTONS
+  static navigatorStyle = {
+    statusBarTextColorScheme: 'dark'
+  }
 
   state = {
     pictureSaveState: ''
