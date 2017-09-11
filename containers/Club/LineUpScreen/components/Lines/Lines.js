@@ -7,16 +7,17 @@ import {
 import Line from '../Line'
 import { LINEUP_SCREEN_STATUS_VISIBLE, LINEUP_ANIMATION_DURATION_IN_MS } from '../../../constants'
 
-const BASE_ENTER_DELAY_IN_MS = LINEUP_ANIMATION_DURATION_IN_MS / 3
-const ANIMATION_IN_NAME = 'fadeInLeft'
-const ANIMATION_OUT_NAME = 'fadeOut'
+const BASE_ENTER_DELAY_IN_MS = LINEUP_ANIMATION_DURATION_IN_MS / 2
+const ANIMATION_IN_NAME = 'fadeInDown'
+const ANIMATION_OUT_NAME = 'fadeOutUp'
 
 export default class Lines extends React.Component {
   render() {
     const { lines, goalkeepers } =  this.props.lineUp
     const { lineUpScreenStatus } = this.props
+    const linesCount = lines.length
     const goalkeepersLineText = goalkeepers.length > 1 ? 'MAALIVAHDIT' : 'MAALIVAHTI'
-    const goalkeepersEnterDelay = BASE_ENTER_DELAY_IN_MS * (lines.length + 1)
+    const goalkeepersEnterDelay = BASE_ENTER_DELAY_IN_MS * (linesCount + 1)
     const animationName = lineUpScreenStatus === LINEUP_SCREEN_STATUS_VISIBLE ? ANIMATION_IN_NAME : ANIMATION_OUT_NAME
 
     return (
@@ -25,8 +26,11 @@ export default class Lines extends React.Component {
           lines.map((line, index) => {
             const lineNumber = index + 1
             const enterDelay = BASE_ENTER_DELAY_IN_MS * lineNumber
+            const zIndexStyle = {
+              zIndex: linesCount - index + 1
+            }
             return (
-              <View style={styles.lineWrapper} key={index}>
+              <View style={[styles.lineWrapper, zIndexStyle]} key={index}>
                 <Line line={line}
                       lineText='KETJU'
                       lineNumber={lineNumber}
@@ -63,6 +67,7 @@ const styles = StyleSheet.create({
   },
   goalkeepersWrapper: {
     flexDirection: 'column',
-    marginBottom: 0
+    marginBottom: 0,
+    zIndex: 0
   }
 })
