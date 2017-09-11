@@ -7,7 +7,7 @@ import {
   StyleSheet
 } from 'react-native'
 import * as Animatable from 'react-native-animatable'
-import { colors, mainFontFamily } from '../../../../../styles'
+import { colors, shadows, mainFontFamily } from '../../../../../styles'
 import PlayerBlock from '../../../../../components/PlayerBlock'
 import { LINEUP_ANIMATION_DURATION_IN_MS } from '../../../constants'
 
@@ -50,7 +50,10 @@ class Line extends React.Component {
     const { line, lineNumber, lineText, animationName, enterDelay } =  this.props
     const lineString = lineNumber ? `${lineNumber}. ${lineText}` : lineText
     return (
-      <Animatable.View animation={animationName} duration={LINEUP_ANIMATION_DURATION_IN_MS} delay={enterDelay} style={styles.lineWrapper}>
+      <Animatable.View animation={animationName}
+                       duration={LINEUP_ANIMATION_DURATION_IN_MS}
+                       delay={enterDelay}
+                       style={[styles.lineWrapper, shadows.defaultBoxShadow]}>
         <Text style={styles.lineText}>{lineString}</Text>
         {renderLine(line)}
       </Animatable.View>

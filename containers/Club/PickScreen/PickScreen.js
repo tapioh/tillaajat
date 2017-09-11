@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import PlayerPool from './components/PlayerPool'
 import PlayerPicker from './components/PlayerPicker'
-import { colors } from '../../../styles'
+import { colors, shadows } from '../../../styles'
 
 const PLAYER_POOL_CONTAINER_HEIGHT_IN_PX = 240
 const screenHeight = Dimensions.get('window').height
@@ -26,7 +26,7 @@ class PickScreen extends React.Component {
           <View style={styles.playerPoolWrapper}>
             <PlayerPool navigator={this.props.navigator} />
           </View>
-          <View style={styles.playerPickerWrapper}>
+          <View style={[styles.playerPickerWrapper, shadows.defaultBoxShadow]}>
             <PlayerPicker players={playersOrdered} />
           </View>
         </View>
@@ -67,14 +67,6 @@ const styles = StyleSheet.create({
   },
   playerPickerWrapper: {
     height: screenHeight - PLAYER_POOL_CONTAINER_HEIGHT_IN_PX,
-    backgroundColor: 'white',
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 0
-    },
-    shadowRadius: 5,
-    shadowOpacity: 0.2,
-    elevation: 1
+    backgroundColor: 'white'
   }
 })
