@@ -17,6 +17,7 @@ import {
   animateLineUpOut
 } from '../actions'
 import Loader from '../../../components/Loader'
+import TopIllustrationImage from '../../../components/TopIllustrationImage'
 import { LINEUP_SCREEN_STATUS_ANIMATE_OUT } from '../constants'
 import { PICTURE_SAVE_STATE_LOADING, PICTURE_SAVE_STATE_SAVED } from './constants'
 import { NAVIGATOR_BUTTONS, RELOAD_BUTTON_ID, DOWNLOAD_BUTTON_ID } from './navigatorButtons'
@@ -30,9 +31,6 @@ const POP_WAIT_DURATION_IN_MS = 150
 
 class LineUpScreen extends React.Component {
   static navigatorButtons = NAVIGATOR_BUTTONS
-  static navigatorStyle = {
-    statusBarTextColorScheme: 'dark'
-  }
 
   state = {
     pictureSaveState: ''
@@ -109,21 +107,24 @@ class LineUpScreen extends React.Component {
     const showLines = hasLines || animateLineUpOut
     const showModal = pictureSaveState !== ''
     return (
-      <View style={styles.container}>
-        {
-          !showLines &&
-          <Loader />
-        }
-        {
-          showLines &&
-          <ScrollView ref={component => this.scrollView = component}
-                      collapsable={false}>
-            <Lines lineUp={lineUp} lineUpScreenStatus={lineUpScreenStatus} />
-          </ScrollView>
-        }
-        <ImageNotificationModal showModal={showModal}
-                                pictureSaveState={pictureSaveState}
-                                onPressContinueButton={() => this.onPressContinueButton()} />
+      <View style={styles.lineUpScreen}>
+        <TopIllustrationImage />
+        <View style={styles.container}>
+          {
+            !showLines &&
+            <Loader />
+          }
+          {
+            showLines &&
+            <ScrollView ref={component => this.scrollView = component}
+                        collapsable={false}>
+              <Lines lineUp={lineUp} lineUpScreenStatus={lineUpScreenStatus} />
+            </ScrollView>
+          }
+          <ImageNotificationModal showModal={showModal}
+                                  pictureSaveState={pictureSaveState}
+                                  onPressContinueButton={() => this.onPressContinueButton()} />
+        </View>
       </View>
     )
   }
@@ -162,12 +163,15 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(LineUpScreen)
 
 const styles = StyleSheet.create({
+  lineUpScreen: {
+    backgroundColor: colors.backgroundGrey,
+  },
   container: {
+    marginTop: HEADER_HEIGHT_IN_PX,
     flexDirection: 'row',
     flexWrap: 'wrap',
     height: screenHeight - HEADER_HEIGHT_IN_PX,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.backgroundGrey
+    alignItems: 'center'
   }
 })

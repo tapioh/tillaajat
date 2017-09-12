@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import FloatingPlayer from './components/FloatingPlayer'
 import { LINE_UP_SCREEN, LINE_UP_SCREEN_TITLE } from '../../../../../screens'
-import { mainFontFamily, colors, shadows } from '../../../../../styles'
+import { mainFontFamily, colors, shadows, navigator } from '../../../../../styles'
 import {
   PLAYER_POOL_HEIGHT_IN_PX,
   PLAYER_POOL_WIDTH_IN_PX,
@@ -25,7 +25,8 @@ class PlayerPool extends React.Component {
   onPressGenerateButton() {
     this.props.navigator.push({
       screen: LINE_UP_SCREEN,
-      title: LINE_UP_SCREEN_TITLE
+      title: LINE_UP_SCREEN_TITLE,
+      navigatorStyle: navigator.transparentNavigator
     })
   }
 

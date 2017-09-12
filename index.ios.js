@@ -13,11 +13,15 @@ Navigation.startSingleScreenApp({
     screen: PICK_SCREEN,
     navigatorStyle: {
       navBarHidden: true,
-      navBarTextColor: colors.black,
+      navBarTextColor: colors.white,
       navBarTextFontFamily: mainFontFamily,
-      navBarButtonColor: colors.blue,
+      navBarButtonColor: colors.white,
       navBarButtonFontSize: 18,
-      navBarButtonFontFamily: mainFontFamily
+      navBarButtonFontFamily: mainFontFamily,
+      navBarTransparent: true,
+      navBarTranslucent: true,
+      drawUnderNavBar: true,
+      statusBarTextColorScheme: 'light'
     }
   }
 })

@@ -8,23 +8,17 @@ import {
 } from 'react-native'
 import PlayerPool from './components/PlayerPool'
 import PlayerPicker from './components/PlayerPicker'
+import TopIllustrationImage from '../../../components/TopIllustrationImage'
 import { colors, shadows } from '../../../styles'
 
 const PLAYER_POOL_CONTAINER_HEIGHT_IN_PX = 240
 const SCREEN_HEIGHT = Dimensions.get('window').height
-const topIllustrationImage = require('../../../assets/images/app-top-illustration.jpg')
 
 export default class PickScreen extends React.Component {
-  static navigatorStyle = {
-    statusBarTextColorScheme: 'light',
-    statusBarBlur: true,
-    navBarBackgroundColor: colors.white
-  }
-
   render() {
     return (
       <View style={styles.pickScreen}>
-        <Image source={topIllustrationImage} style={styles.topIllustrationImage} />
+        <TopIllustrationImage />
         <View>
           <View style={styles.playerPoolWrapper}>
             <PlayerPool navigator={this.props.navigator} />
@@ -44,17 +38,13 @@ PickScreen.propTypes = {
 
 const styles = StyleSheet.create({
   pickScreen: {
-    backgroundColor: colors.backgroundGrey
-  },
-  topIllustrationImage: {
-    height: 190,
-    width: '100%',
-    marginBottom: -170
+    backgroundColor: colors.backgroundGrey,
   },
   playerPoolWrapper: {
     justifyContent: 'center',
     marginHorizontal: 15,
     height: 250,
+    marginTop: 20,
     marginBottom: -30,
     zIndex: 1
   },
